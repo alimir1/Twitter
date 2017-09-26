@@ -8,16 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		35155D7F3C61BEAA7D09F382 /* Pods_Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10ADEC89622144AF41D59DA2 /* Pods_Twitter.framework */; };
+		492416771F7AD7F500AB0E97 /* ClientStringKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492416761F7AD7F500AB0E97 /* ClientStringKeys.swift */; };
+		4924167A1F7AD8D100AB0E97 /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492416791F7AD8D100AB0E97 /* ClientError.swift */; };
 		494483AA1F7AB61D009A099C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483A91F7AB61D009A099C /* AppDelegate.swift */; };
 		494483AC1F7AB61D009A099C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483AB1F7AB61D009A099C /* ViewController.swift */; };
 		494483AF1F7AB61D009A099C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 494483AD1F7AB61D009A099C /* Main.storyboard */; };
 		494483B11F7AB61D009A099C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 494483B01F7AB61D009A099C /* Assets.xcassets */; };
 		494483B41F7AB61D009A099C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 494483B21F7AB61D009A099C /* LaunchScreen.storyboard */; };
+		494483BD1F7AC758009A099C /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483BC1F7AC758009A099C /* AccountManager.swift */; };
+		494483BF1F7ACED7009A099C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483BE1F7ACED7009A099C /* Client.swift */; };
+		494483C11F7ACFA2009A099C /* ManagerStringKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483C01F7ACFA2009A099C /* ManagerStringKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		013C854F6736C1C515EC6DBE /* Pods-Twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.release.xcconfig"; sourceTree = "<group>"; };
 		10ADEC89622144AF41D59DA2 /* Pods_Twitter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Twitter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		492416761F7AD7F500AB0E97 /* ClientStringKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientStringKeys.swift; sourceTree = "<group>"; };
+		492416791F7AD8D100AB0E97 /* ClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		494483A61F7AB61D009A099C /* Twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		494483A91F7AB61D009A099C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		494483AB1F7AB61D009A099C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -25,6 +32,9 @@
 		494483B01F7AB61D009A099C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		494483B31F7AB61D009A099C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		494483B51F7AB61D009A099C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		494483BC1F7AC758009A099C /* AccountManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
+		494483BE1F7ACED7009A099C /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		494483C01F7ACFA2009A099C /* ManagerStringKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerStringKeys.swift; sourceTree = "<group>"; };
 		A013B7958590E38E24B4EA28 /* Pods-Twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,6 +50,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		492416781F7AD80600AB0E97 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				494483BE1F7ACED7009A099C /* Client.swift */,
+				492416791F7AD8D100AB0E97 /* ClientError.swift */,
+				492416761F7AD7F500AB0E97 /* ClientStringKeys.swift */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
 		4944839D1F7AB61D009A099C = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				494483A91F7AB61D009A099C /* AppDelegate.swift */,
+				494483BB1F7AC741009A099C /* TwitterAPI */,
 				494483AB1F7AB61D009A099C /* ViewController.swift */,
 				494483AD1F7AB61D009A099C /* Main.storyboard */,
 				494483B01F7AB61D009A099C /* Assets.xcassets */,
@@ -69,6 +90,24 @@
 				494483B51F7AB61D009A099C /* Info.plist */,
 			);
 			path = Twitter;
+			sourceTree = "<group>";
+		};
+		494483BB1F7AC741009A099C /* TwitterAPI */ = {
+			isa = PBXGroup;
+			children = (
+				494483C21F7AD351009A099C /* AccountManager */,
+				492416781F7AD80600AB0E97 /* Client */,
+			);
+			name = TwitterAPI;
+			sourceTree = "<group>";
+		};
+		494483C21F7AD351009A099C /* AccountManager */ = {
+			isa = PBXGroup;
+			children = (
+				494483BC1F7AC758009A099C /* AccountManager.swift */,
+				494483C01F7ACFA2009A099C /* ManagerStringKeys.swift */,
+			);
+			name = AccountManager;
 			sourceTree = "<group>";
 		};
 		5A79F4DDF2503A858AF3E766 /* Frameworks */ = {
@@ -221,7 +260,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				494483AC1F7AB61D009A099C /* ViewController.swift in Sources */,
+				494483C11F7ACFA2009A099C /* ManagerStringKeys.swift in Sources */,
+				494483BD1F7AC758009A099C /* AccountManager.swift in Sources */,
+				492416771F7AD7F500AB0E97 /* ClientStringKeys.swift in Sources */,
 				494483AA1F7AB61D009A099C /* AppDelegate.swift in Sources */,
+				494483BF1F7ACED7009A099C /* Client.swift in Sources */,
+				4924167A1F7AD8D100AB0E97 /* ClientError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

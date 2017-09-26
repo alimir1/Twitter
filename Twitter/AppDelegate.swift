@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import BDBOAuth1Manager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -42,43 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-        let requestToken = BDBOAuth1Credential(queryString: url.query)
-        let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "GwywzWnK609rylZRn7Os4K6pd", consumerSecret: "nwUiScF9sZkEfkEsEFpd38iHhT36id0ZxUUST9J0uQ6ll1wk0X")
-        
-        twitterClient?.fetchAccessToken(
-            withPath: "oauth/access_token",
-            method: "POST",
-            requestToken: requestToken,
-            success: {
-                accessToken in
-                guard let accessToken = accessToken else {
-                    print("AppDelegate: failed to get access token!")
-                    return
-                }
-                
-                twitterClient?.get(
-                    "1.1/statuses/home_timeline.json",
-                    parameters: nil,
-                    progress: nil,
-                    success: {
-                        task, response in
-                        guard let response = response else { return }
-                        print("timeline:\n\(response)")
-                },
-                    failure: {
-                        task, error in
-                })
-                
-        },
-            failure: {
-                error in
-                if let error = error {
-                    print("AppDelegate: \(error.localizedDescription)")
-                }
-        })
-        
-        print(url.description)
+        TwitterAccountManager.shared.handle(open: url)
         return true
     }
     

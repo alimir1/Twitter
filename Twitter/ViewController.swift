@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import BDBOAuth1Manager
 
 class LoginViewController: UIViewController {
 
@@ -17,31 +16,14 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func onLoginTap(sender: AnyObject?) {
-        let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "GwywzWnK609rylZRn7Os4K6pd", consumerSecret: "nwUiScF9sZkEfkEsEFpd38iHhT36id0ZxUUST9J0uQ6ll1wk0X")
-        twitterClient?.deauthorize()
-        twitterClient?.fetchRequestToken(
-            withPath: "oauth/request_token",
-            method: "GET",
-            callbackURL: URL(string: "twitterDemo1://oauth"),
-            scope: nil,
+        TwitterAccountManager.shared.login(
             success: {
-                requestToken in
-                
-                guard let requestToken = requestToken, let token = requestToken.token else {
-                    print("LoginViewController: did not get request token!")
-                    return
-                }
-                
-                
-                let url = URL(string: "https://api.twitter.com/oauth/authenticate?oauth_token=\(token)")!
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                print("successfully logged in!!! :D")
         },
             failure: {
                 error in
-                if let error = error {
-                    print("LoginViewController: \(error.localizedDescription)")
-                }
         })
+        
     }
 }
 
