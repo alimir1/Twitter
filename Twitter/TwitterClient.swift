@@ -9,6 +9,10 @@
 import UIKit
 import BDBOAuth1Manager
 
+internal enum TweetSource {
+    case homeTimeline
+}
+
 internal class TwitterClient: BDBOAuth1SessionManager {
     
     // MARK: Singleton
@@ -31,7 +35,15 @@ internal class TwitterClient: BDBOAuth1SessionManager {
             requestToken: requestToken,
             success: {
                 _ in
-                self.loginSuccess?()
+                self.createAccount {
+                    user, error in
+                    if let user = user {
+                        self.loginSuccess?()
+                        User.setCurrentUser(user: user)
+                    } else {
+                        self.loginFailure?(error!)
+                    }
+                }
         },
             failure: {
                 error in
@@ -39,6 +51,33 @@ internal class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+}
+
+// MARK: - Requests
+
+extension TwitterClient {
+    // MARK: Get
+    
+    fileprivate func getRequest(_ urlString: String, completion: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        get(
+            urlString,
+            parameters: nil,
+            progress: nil,
+            success: {
+                task, response in
+                guard let response = response else { return }
+                completion(response, nil)
+        },
+            failure: {
+                task, error in
+                completion(nil, error)
+        })
+    }
+}
+
+// MARK: - Login/Logout
+
+extension TwitterClient {
     // MARK: Login
     
     internal func login(success: @escaping () -> Void, failure: @escaping Failure) {
@@ -65,24 +104,18 @@ internal class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    private func request(_ urlString: String, completion: @escaping (_ response: Any?, _ error: Error?) -> Void) {
-        get(
-            urlString,
-            parameters: nil,
-            progress: nil,
-            success: {
-                task, response in
-                guard let response = response else { return }
-                completion(response, nil)
-        },
-            failure: {
-                task, error in
-                completion(nil, error)
-        })
-    }
+    // Mark: Logout
     
-    internal func user(completion: @escaping (_ response: User?, _ error: Error?) -> Void) {
-        request(RequestURL.accountVerifyCredentials) {
+    internal func logout() {
+        deauthorize()
+    }
+}
+
+// MARK: - Conveniences
+
+extension TwitterClient {
+    internal func createAccount(completion: @escaping (_ response: User?, _ error: Error?) -> Void) {
+        getRequest(RequestURL.accountVerifyCredentials) {
             response, error in
             if let response = response {
                 let user = User(dictionary: response as! NSDictionary)
@@ -102,7 +135,7 @@ internal class TwitterClient: BDBOAuth1SessionManager {
             requestURLString = RequestURL.timeline
         }
         
-        request(requestURLString) {
+        getRequest(requestURLString) {
             response, error in
             if let response = response {
                 let timeline = Tweet.tweets(from: response as! [NSDictionary])
@@ -110,6 +143,39 @@ internal class TwitterClient: BDBOAuth1SessionManager {
             } else {
                 completion(nil, error!)
             }
+        }
+    }
+}
+
+// MARK: - String Keys
+
+extension TwitterClient {
+    fileprivate static let BaseURL = "https://api.twitter.com"
+    
+    // MARK: Methods
+    
+    fileprivate struct Method {
+        static let get = "GET"
+        static let post = "POST"
+        static let put = "PUT"
+    }
+    
+    // MARK: API Keys
+    
+    fileprivate struct APIKey {
+        static let consumerKey = "GwywzWnK609rylZRn7Os4K6pd"
+        static let consumerSecret = "nwUiScF9sZkEfkEsEFpd38iHhT36id0ZxUUST9J0uQ6ll1wk0X"
+    }
+    
+    // MARK: Request URL
+    
+    fileprivate struct RequestURL {
+        static let accessToken = "oauth/access_token"
+        static let requestToken = "oauth/request_token"
+        static let timeline = "1.1/statuses/home_timeline.json"
+        static let accountVerifyCredentials = "1.1/account/verify_credentials.json"
+        static func authentication(token: String) -> String {
+            return "https://api.twitter.com/oauth/authenticate?oauth_token=\(token)"
         }
     }
 }

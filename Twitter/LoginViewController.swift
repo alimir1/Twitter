@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     @IBAction func onLoginTap(sender: AnyObject?) {
         TwitterClient.shared.login(
             success: {
-                TwitterClient.shared.user {
+                TwitterClient.shared.createAccount {
                     response, error in
                 }
                 

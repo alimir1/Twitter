@@ -16,7 +16,6 @@
 		494483B11F7AB61D009A099C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 494483B01F7AB61D009A099C /* Assets.xcassets */; };
 		494483B41F7AB61D009A099C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 494483B21F7AB61D009A099C /* LaunchScreen.storyboard */; };
 		494483BD1F7AC758009A099C /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483BC1F7AC758009A099C /* TwitterClient.swift */; };
-		494483C11F7ACFA2009A099C /* TwitterStringKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483C01F7ACFA2009A099C /* TwitterStringKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +31,6 @@
 		494483B31F7AB61D009A099C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		494483B51F7AB61D009A099C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		494483BC1F7AC758009A099C /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
-		494483C01F7ACFA2009A099C /* TwitterStringKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterStringKeys.swift; sourceTree = "<group>"; };
 		A013B7958590E38E24B4EA28 /* Pods-Twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				494483BC1F7AC758009A099C /* TwitterClient.swift */,
-				494483C01F7ACFA2009A099C /* TwitterStringKeys.swift */,
 			);
 			name = TwitterAPI;
 			sourceTree = "<group>";
@@ -250,7 +247,6 @@
 			files = (
 				4924167E1F7ADEE900AB0E97 /* Tweet.swift in Sources */,
 				494483AC1F7AB61D009A099C /* LoginViewController.swift in Sources */,
-				494483C11F7ACFA2009A099C /* TwitterStringKeys.swift in Sources */,
 				494483BD1F7AC758009A099C /* TwitterClient.swift in Sources */,
 				4924167C1F7ADDDC00AB0E97 /* User.swift in Sources */,
 				494483AA1F7AB61D009A099C /* AppDelegate.swift in Sources */,

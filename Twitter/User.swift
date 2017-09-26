@@ -69,4 +69,9 @@ internal class User: NSObject {
         
         self.followingCount = (dictionary["friends_count"] as? Int) ?? 0
     }
+    
+    internal class func setCurrentUser(user: User) {
+        User._currentUser = user
+    }
+    
 }
