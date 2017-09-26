@@ -20,23 +20,23 @@ internal class User: NSObject {
     private(set) var followingCount: Int = 0
     private(set) var dictionary: NSDictionary?
     
-    internal static var _currentUser: User?
+    internal static var currentUser: User?
     
-    private class var currentUser: User? {
+    private class var _currentUser: User? {
         get {
-            if _currentUser == nil {
+            if currentUser == nil {
                 if let data = UserDefaults.standard.object(forKey: "currentUser") as? NSData, let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? NSDictionary {
                     let user = User(dictionary: dictionary)
-                    _currentUser = user
+                    currentUser = user
                 }
             }
-            return _currentUser
+            return currentUser
         
         }
         
         set(newUser) {
             if let user = newUser, let dict = user.dictionary {
-                _currentUser = user
+                currentUser = user
                 let data = NSKeyedArchiver.archivedData(withRootObject: dict)
                 let userDefaults = UserDefaults.standard
                 userDefaults.set(data, forKey:"currentUser")
