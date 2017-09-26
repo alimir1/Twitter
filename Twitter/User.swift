@@ -14,10 +14,10 @@ class User: NSObject {
     var createdAt: Date?
     var tagline: String?
     var screenName: String?
-    var followersCount: Int?
+    var followersCount: Int = 0
     var profileURL: URL?
-    var tweetsCount: Int?
-    var followingCount: Int?
+    var tweetsCount: Int = 0
+    var followingCount: Int = 0
     
     init(dictionary: NSDictionary) {
         if let timeStampString = dictionary["created_at"] as? String {

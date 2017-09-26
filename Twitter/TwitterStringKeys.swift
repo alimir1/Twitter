@@ -9,7 +9,7 @@
 import Foundation
 
 internal enum TweetSource {
-    case timeline
+    case homeTimeline
 }
 
 extension TwitterClient {

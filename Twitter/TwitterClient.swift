@@ -98,7 +98,7 @@ internal class TwitterClient: BDBOAuth1SessionManager {
         var requestURLString = ""
         
         switch source {
-        case .timeline:
+        case .homeTimeline:
             requestURLString = RequestURL.timeline
         }
         

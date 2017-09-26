@@ -21,6 +21,10 @@ class LoginViewController: UIViewController {
                 TwitterClient.shared.user {
                     response, error in
                 }
+                
+                TwitterClient.shared.tweets(from: .homeTimeline) {
+                    response, error in
+                }
         },
             failure: {
                 error in
