@@ -20,6 +20,9 @@ internal class TwitterAccountManager: BDBOAuth1SessionManager {
     private var loginSuccess: (() -> Void)?
     private var loginFailure: (Failure)?
     
+    
+    // MARK: URL Handler
+    
     internal func handle(open url: URL) {
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         fetchAccessToken(
@@ -35,6 +38,8 @@ internal class TwitterAccountManager: BDBOAuth1SessionManager {
                 self.loginFailure?(error)
         })
     }
+    
+    // MARK: Login
     
     internal func login(success: @escaping () -> Void, failure: @escaping Failure) {
         deauthorize()
