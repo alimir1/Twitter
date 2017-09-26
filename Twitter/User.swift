@@ -8,18 +8,47 @@
 
 import Foundation
 
-class User: NSObject {
+internal class User: NSObject {
     
-    var name: String?
-    var createdAt: Date?
-    var tagline: String?
-    var screenName: String?
-    var followersCount: Int = 0
-    var profileURL: URL?
-    var tweetsCount: Int = 0
-    var followingCount: Int = 0
+    private(set) var name: String?
+    private(set) var createdAt: Date?
+    private(set) var tagline: String?
+    private(set) var screenName: String?
+    private(set) var followersCount: Int = 0
+    private(set) var profileURL: URL?
+    private(set) var tweetsCount: Int = 0
+    private(set) var followingCount: Int = 0
+    private(set) var dictionary: NSDictionary?
+    
+    internal static var _currentUser: User?
+    
+    private class var currentUser: User? {
+        get {
+            if _currentUser == nil {
+                if let data = UserDefaults.standard.object(forKey: "currentUser") as? NSData, let dictionary = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? NSDictionary {
+                    let user = User(dictionary: dictionary)
+                    _currentUser = user
+                }
+            }
+            return _currentUser
+        
+        }
+        
+        set(newUser) {
+            if let user = newUser, let dict = user.dictionary {
+                _currentUser = user
+                let data = NSKeyedArchiver.archivedData(withRootObject: dict)
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(data, forKey:"currentUser")
+                userDefaults.synchronize()
+            }
+        }
+    }
     
     init(dictionary: NSDictionary) {
+        
+        self.dictionary = dictionary
+        
         if let timeStampString = dictionary["created_at"] as? String {
             let formatter = DateFormatter()
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
@@ -30,21 +59,14 @@ class User: NSObject {
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
         
-        if let followersCount = dictionary["followers_count"] as? NSNumber {
-            self.followersCount = Int(followersCount)
-        }
+        self.followersCount = (dictionary["followers_count"] as? Int) ?? 0
         
         if let profileURLString = dictionary["profile_image_url_https"] as? String {
             profileURL = URL(string: profileURLString)
         }
         
-        if let tweetsCount = dictionary["statuses_count"] as? NSNumber {
-            self.tweetsCount = Int(tweetsCount)
-        }
+        self.tweetsCount = (dictionary["statuses_count"] as? Int) ?? 0
         
-        if let followingCount = dictionary["friends_count"] as? NSNumber {
-            self.followingCount = Int(followingCount)
-        }
-        
+        self.followingCount = (dictionary["friends_count"] as? Int) ?? 0
     }
 }

@@ -8,13 +8,13 @@
 
 import Foundation
 
-class Tweet: NSObject {
+internal class Tweet: NSObject {
     
-    var user: User?
-    var createdAt: Date?
-    var text: String?
-    var retweetCount: Int = 0
-    var favoritesCount: Int = 0
+    private(set) var user: User?
+    private(set) var createdAt: Date?
+    private(set) var text: String?
+    private(set) var retweetCount: Int = 0
+    private(set) var favoritesCount: Int = 0
     
     init(dictionary: NSDictionary) {
         if let userDict = dictionary["user"] as? NSDictionary {
@@ -33,7 +33,7 @@ class Tweet: NSObject {
         
     }
     
-    class func tweets(from dictionaries: [NSDictionary]) -> [Tweet] {
+    internal class func tweets(from dictionaries: [NSDictionary]) -> [Tweet] {
         return dictionaries.map {Tweet(dictionary: $0)}
     }
 }
