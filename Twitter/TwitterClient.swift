@@ -9,11 +9,11 @@
 import UIKit
 import BDBOAuth1Manager
 
-internal class TwitterAccountManager: BDBOAuth1SessionManager {
+internal class TwitterClient: BDBOAuth1SessionManager {
     
     // MARK: Singleton
     
-    static let shared = TwitterAccountManager(baseURL: URL(string: BaseURL)!, consumerKey: APIKey.consumerKey, consumerSecret: APIKey.consumerSecret)!
+    static let shared = TwitterClient(baseURL: URL(string: BaseURL)!, consumerKey: APIKey.consumerKey, consumerSecret: APIKey.consumerSecret)!
     
     internal typealias Failure = (Error?) -> Void
     
@@ -63,5 +63,53 @@ internal class TwitterAccountManager: BDBOAuth1SessionManager {
                 error in
                 self.loginFailure?(error)
         })
+    }
+    
+    private func request(_ urlString: String, completion: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        get(
+            urlString,
+            parameters: nil,
+            progress: nil,
+            success: {
+                task, response in
+                guard let response = response else { return }
+                completion(response, nil)
+        },
+            failure: {
+                task, error in
+                completion(nil, error)
+        })
+    }
+    
+    internal func user(completion: @escaping (_ response: User?, _ error: Error?) -> Void) {
+        request(RequestURL.accountVerifyCredentials) {
+            response, error in
+            if let response = response {
+                let user = User(dictionary: response as! NSDictionary)
+                completion(user, nil)
+            } else {
+                completion(nil, error!)
+            }
+        }
+    }
+    
+    internal func tweets(from source: TweetSource, completion: @escaping (_ response: [Tweet]?, _ error: Error?) -> Void) {
+        
+        var requestURLString = ""
+        
+        switch source {
+        case .timeline:
+            requestURLString = RequestURL.timeline
+        }
+        
+        request(requestURLString) {
+            response, error in
+            if let response = response {
+                let timeline = Tweet.tweets(from: response as! [NSDictionary])
+                completion(timeline, nil)
+            } else {
+                completion(nil, error!)
+            }
+        }
     }
 }

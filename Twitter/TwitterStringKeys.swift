@@ -8,7 +8,11 @@
 
 import Foundation
 
-extension TwitterAccountManager {
+internal enum TweetSource {
+    case timeline
+}
+
+extension TwitterClient {
     internal static let BaseURL = "https://api.twitter.com"
     
     // MARK: Methods
@@ -31,6 +35,8 @@ extension TwitterAccountManager {
     internal struct RequestURL {
         static let accessToken = "oauth/access_token"
         static let requestToken = "oauth/request_token"
+        static let timeline = "1.1/statuses/home_timeline.json"
+        static let accountVerifyCredentials = "1.1/account/verify_credentials.json"
         static func authentication(token: String) -> String {
             return "https://api.twitter.com/oauth/authenticate?oauth_token=\(token)"
         }
