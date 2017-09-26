@@ -35,8 +35,8 @@ internal class User: NSObject {
         }
         
         set(newUser) {
+            currentUser = newUser
             if let user = newUser, let dict = user.dictionary {
-                currentUser = user
                 let data = NSKeyedArchiver.archivedData(withRootObject: dict)
                 let userDefaults = UserDefaults.standard
                 userDefaults.set(data, forKey:"currentUser")
@@ -72,6 +72,10 @@ internal class User: NSObject {
     
     internal class func setCurrentUser(user: User) {
         User._currentUser = user
+    }
+    
+    internal class func removeCurrentUser() {
+        User._currentUser = nil
     }
     
 }

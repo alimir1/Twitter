@@ -21,8 +21,8 @@ internal class TwitterClient: BDBOAuth1SessionManager {
     
     internal typealias Failure = (Error?) -> Void
     
-    private var loginSuccess: (() -> Void)?
-    private var loginFailure: (Failure)?
+    fileprivate var loginSuccess: (() -> Void)?
+    fileprivate var loginFailure: (Failure)?
     
     
     // MARK: URL Handler
@@ -107,6 +107,7 @@ extension TwitterClient {
     // Mark: Logout
     
     internal func logout() {
+        User.removeCurrentUser()
         deauthorize()
     }
 }
