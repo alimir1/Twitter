@@ -34,7 +34,6 @@ internal class HomeCell: UITableViewCell {
             
             if let mediaURL = tweet.mediaURL {
                 mediaImageView.setImageWith(mediaURL)
-                layoutIfNeeded()
             }
             
             guard !tweet.isRetweetedTweet else {
