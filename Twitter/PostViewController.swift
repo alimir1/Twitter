@@ -26,6 +26,7 @@ internal class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tweetTextView.becomeFirstResponder()
         originalBottomConstraintConstant = bottomConstraint.constant
         setupViews()
         addKeyboardObservers()
@@ -74,6 +75,7 @@ internal class PostViewController: UIViewController {
     // MARK: Target-Action
     
     @IBAction private func onCancel(sender: UIButton?) {
+        view.endEditing(true)
         dismiss(animated: true, completion: nil)
     }
     

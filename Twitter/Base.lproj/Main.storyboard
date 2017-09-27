@@ -88,15 +88,18 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="GKz-J6-fEy" userLabel="Options Stack View">
                                                     <rect key="frame" x="84" y="129" width="160" height="22"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Hx-ha0">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Hx-ha0" userLabel="Reply Button">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
                                                             <state key="normal" image="Reply"/>
+                                                            <connections>
+                                                                <action selector="onReply:" destination="HTY-bJ-H97" eventType="touchUpInside" id="j5G-o5-gEK"/>
+                                                            </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbi-Hj-wrm">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbi-Hj-wrm" userLabel="Retweet Button">
                                                             <rect key="frame" x="70" y="0.0" width="20" height="22"/>
                                                             <state key="normal" image="Retweet"/>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WII-GX-c3T">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WII-GX-c3T" userLabel="Favorite Button">
                                                             <rect key="frame" x="140" y="0.0" width="20" height="22"/>
                                                             <state key="normal" image="Star"/>
                                                         </button>
@@ -196,7 +199,7 @@
                         <barButtonItem key="rightBarButtonItem" image="Compose" id="int-Ql-Bn3">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="Wg1-xN-qmG" kind="presentation" id="uuJ-BP-liJ"/>
+                                <segue destination="Wg1-xN-qmG" kind="presentation" animates="NO" id="uuJ-BP-liJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

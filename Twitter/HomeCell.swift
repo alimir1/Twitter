@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol HomeCellDelegate: class {
+    @objc optional func homeCell(_ cell: HomeCell, didTapReplyButton with: UIButton)
+}
+
 internal class HomeCell: UITableViewCell {
     
     // MARK: Outlets
@@ -37,6 +41,10 @@ internal class HomeCell: UITableViewCell {
             setupCellForNonRetweetedTweet()
         }
     }
+    
+    // MARK: Delegate Property
+    
+    internal var delegate: HomeCellDelegate?
     
     // MARK: Lifecycles
     
@@ -68,5 +76,12 @@ internal class HomeCell: UITableViewCell {
         self.usernameSmallLabel.text = "@\(tweet.user!.screenName!)"
         self.usernameLabel.text = tweet.user?.name
     }
+    
+    // MARK: Target-action
+    
+    @IBAction func onReply(_ sender: UIButton) {
+        delegate?.homeCell?(self, didTapReplyButton: sender)
+    }
+    
     
 }
