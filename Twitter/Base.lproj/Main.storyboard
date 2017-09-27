@@ -46,11 +46,11 @@
                         <viewControllerLayoutGuide type="bottom" id="bba-wK-vFu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Om5-FI-VgG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G3o-bb-6xK">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="homeCell" id="HTY-bJ-H97" customClass="HomeCell" customModule="Twitter" customModuleProvider="target">
@@ -166,12 +166,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="zaS-w7-ktr">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="p1C-xT-KLu">
+                        <barButtonItem key="leftBarButtonItem" image="Sign Out" id="p1C-xT-KLu">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onLogoutWithSender:" destination="sJM-c0-eVZ" id="LFs-Pu-hjD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="int-Ql-Bn3"/>
+                        <barButtonItem key="rightBarButtonItem" image="Compose" id="int-Ql-Bn3">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="G3o-bb-6xK" id="cmg-YZ-UPs"/>
@@ -186,9 +189,13 @@
             <objects>
                 <navigationController storyboardIdentifier="tweetsNavCtrl" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YmW-AM-bjB" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nIu-Wq-uYM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="nIu-Wq-uYM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.38379873192095193" green="0.6555947222825369" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -201,8 +208,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Compose" width="25" height="25"/>
         <image name="Reply" width="20" height="20"/>
         <image name="Retweet" width="20" height="20"/>
+        <image name="Sign Out" width="25" height="25"/>
         <image name="Star" width="20" height="20"/>
     </resources>
 </document>
