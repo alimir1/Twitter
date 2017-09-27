@@ -35,7 +35,6 @@ internal class User: NSObject {
     // MARK: Computed Properties
     
     internal static var isUserLoggedIn: Bool = {
-        
         return _currentUser != nil
     }()
     

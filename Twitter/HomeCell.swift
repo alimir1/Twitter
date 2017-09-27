@@ -11,6 +11,7 @@ import UIKit
 internal class HomeCell: UITableViewCell {
 
     @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var mediaImageView: UIImageView!
     @IBOutlet private var usernameSmallLabel: UILabel!
     @IBOutlet private var usernameLabel: UILabel!
     @IBOutlet private var tweetTextLabel: UILabel!
@@ -25,7 +26,9 @@ internal class HomeCell: UITableViewCell {
             self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
             
             if let mediaURL = tweet.mediaURL {
-                print("has media url!!!")
+                mediaImageView.setImageWith(mediaURL)
+            } else {
+                mediaImageView.image = nil
             }
         }
     }
@@ -33,5 +36,6 @@ internal class HomeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.layer.cornerRadius = 5
+        mediaImageView.layer.cornerRadius = 5
     }
 }

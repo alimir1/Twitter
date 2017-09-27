@@ -73,7 +73,8 @@ extension HomeViewController {
                 self.tweets = tweets
                 self.tableView.reloadData()
             } else {
-                print("no tweets here!")
+                print("HomeViewController: no tweets!")
+                print(error!.localizedDescription)
             }
             self.endRefreshing()
         }
