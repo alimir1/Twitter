@@ -227,7 +227,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9L-Jh-iRE" userLabel="User Info View">
                                         <rect key="frame" x="0.0" y="169.5" width="327" height="30.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@alimir" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnW-Iz-tsc">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@someUser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnW-Iz-tsc">
                                                 <rect key="frame" x="8" y="8" width="311" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -270,6 +270,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="laM-Fv-6JI">
                                                         <rect key="frame" x="269" y="0.0" width="42" height="30"/>
                                                         <state key="normal" title="Tweet"/>
+                                                        <connections>
+                                                            <action selector="onPostTweetWithSender:" destination="Wg1-xN-qmG" eventType="touchUpInside" id="HGy-d1-lL1"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -313,6 +316,8 @@
                     <connections>
                         <outlet property="bottomConstraint" destination="bJz-ZC-8Kh" id="iV7-L1-QJC"/>
                         <outlet property="popupView" destination="T4I-pR-3xv" id="nIR-EG-NO6"/>
+                        <outlet property="tweetTextView" destination="MMH-Qe-EiY" id="SLT-0f-DSh"/>
+                        <outlet property="usernameLabel" destination="rnW-Iz-tsc" id="7Mp-V5-LHK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SBd-83-NOi" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -24,8 +24,8 @@ internal class HomeViewController: UIViewController {
     
     internal override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
-        fetchData()
+//        setupViews()
+//        fetchData()
     }
     
     // MARK: Target-Actions

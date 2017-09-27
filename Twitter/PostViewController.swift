@@ -13,11 +13,14 @@ class PostViewController: UIViewController {
     
     @IBOutlet var popupView: UIView!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet var tweetTextView: UITextView!
+    @IBOutlet var usernameLabel: UILabel!
     
     var originalBottomConstraintConstant: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameLabel.text = "@\(User.currentUser?.screenName ?? "")"
         originalBottomConstraintConstant = bottomConstraint.constant
         popupView.layer.cornerRadius = 10
         popupView.layer.masksToBounds = true
@@ -55,9 +58,20 @@ class PostViewController: UIViewController {
     @IBAction func onCancel(sender: UIButton?) {
         dismiss(animated: true, completion: nil)
     }
-
-}
-
-extension PostViewController: UITextFieldDelegate {
+    
+    @IBAction func onPostTweet(sender: UIButton?) {
+        guard !tweetTextView.text.isEmpty else { return } // FIXME: display more meaningful message to user!
+        MBProgressHUD.showAdded(to: view, animated: true)
+        TwitterClient.shared.post(tweet: tweetTextView.text) {
+            didSuccessfullyPost, potentialError in
+            if didSuccessfullyPost {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                // FIXME: Show nice error somewhere...
+                print(potentialError!.localizedDescription)
+            }
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
 
 }

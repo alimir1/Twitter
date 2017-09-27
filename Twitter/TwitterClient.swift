@@ -58,18 +58,32 @@ internal class TwitterClient: BDBOAuth1SessionManager {
 extension TwitterClient {
     // MARK: Get
     
-    fileprivate func getRequest(_ urlString: String, with parameters: Any? = nil, completion: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+    fileprivate func getRequest(_ urlString: String, with parameters: Any?, completion: @escaping (_ response: Any?, _ error: Error?) -> Void) {
         get(
             urlString,
             parameters: parameters,
             progress: nil,
             success: {
                 task, response in
-                guard let response = response else { return }
                 completion(response, nil)
         },
             failure: {
                 task, error in
+                completion(nil, error)
+        })
+    }
+    
+    // MARK: Post
+    
+    fileprivate func postRequest(_ urlString: String, with parameters: Any?, completion: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+        post(
+            urlString,
+            parameters: parameters,
+            progress: nil,
+            success: { task, response in
+                completion(response, nil)
+        },
+            failure: { task, error in
                 completion(nil, error)
         })
     }
@@ -118,13 +132,13 @@ extension TwitterClient {
 
 extension TwitterClient {
     internal func createAccount(completion: @escaping (_ response: User?, _ error: Error?) -> Void) {
-        getRequest(RequestURL.accountVerifyCredentials) {
+        getRequest(RequestURL.accountVerifyCredentials, with: nil) {
             response, error in
             if let response = response {
                 let user = User(dictionary: response as! NSDictionary)
                 completion(user, nil)
             } else {
-                completion(nil, error!)
+                completion(nil, error)
             }
         }
     }
@@ -144,10 +158,23 @@ extension TwitterClient {
                 let timeline = Tweet.tweets(from: response as! [NSDictionary])
                 completion(timeline, nil)
             } else {
-                completion(nil, error!)
+                completion(nil, error)
             }
         }
     }
+    
+    internal func post(tweet text: String, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+        
+        postRequest(RequestURL.update, with: ["status" : text]) {
+            response, error in
+            if response != nil {
+                completion(true, error)
+            } else {
+                completion(false, error)
+            }
+        }
+    }
+    
 }
 
 // MARK: - String Keys
@@ -176,6 +203,7 @@ extension TwitterClient {
         static let accessToken = "oauth/access_token"
         static let requestToken = "oauth/request_token"
         static let timeline = "1.1/statuses/home_timeline.json"
+        static let update = "1.1/statuses/update.json"
         static let accountVerifyCredentials = "1.1/account/verify_credentials.json"
         static func authentication(token: String) -> String {
             return "https://api.twitter.com/oauth/authenticate?oauth_token=\(token)"
