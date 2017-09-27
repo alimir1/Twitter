@@ -8,15 +8,15 @@
 
 import UIKit
 
-class HomeCell: UITableViewCell {
+internal class HomeCell: UITableViewCell {
 
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet var usernameSmallLabel: UILabel!
-    @IBOutlet var usernameLabel: UILabel!
-    @IBOutlet var tweetTextLabel: UILabel!
-    @IBOutlet var timeStampLabel: UILabel!
+    @IBOutlet private var profileImageView: UIImageView!
+    @IBOutlet private var usernameSmallLabel: UILabel!
+    @IBOutlet private var usernameLabel: UILabel!
+    @IBOutlet private var tweetTextLabel: UILabel!
+    @IBOutlet private var timeStampLabel: UILabel!
     
-    var tweet: Tweet! {
+    internal var tweet: Tweet! {
         didSet {
             self.profileImageView.setImageWith(tweet.user!.profileURL!)
             self.usernameSmallLabel.text = "@\(tweet.user!.screenName!)"

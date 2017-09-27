@@ -10,12 +10,16 @@ import Foundation
 
 internal class Tweet: NSObject {
     
+    // MARK: Stored Properties
+    
     private(set) var user: User?
     private(set) var createdAt: Date?
     private(set) var text: String?
     private(set) var retweetCount: Int = 0
     private(set) var favoritesCount: Int = 0
     private(set) var isRetweeted: Bool?
+    
+    // MARK: Initializers
     
     init(dictionary: NSDictionary) {
         if let userDict = dictionary["user"] as? NSDictionary {
@@ -35,6 +39,8 @@ internal class Tweet: NSObject {
         isRetweeted = dictionary["retweeted"] as? Bool
         
     }
+    
+    // MARK: Helpers
     
     internal class func tweets(from dictionaries: [NSDictionary]) -> [Tweet] {
         return dictionaries.map {Tweet(dictionary: $0)}

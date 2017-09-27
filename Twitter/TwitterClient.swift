@@ -17,7 +17,7 @@ internal class TwitterClient: BDBOAuth1SessionManager {
     
     // MARK: Singleton
     
-    static let shared = TwitterClient(baseURL: URL(string: BaseURL)!, consumerKey: APIKey.consumerKey, consumerSecret: APIKey.consumerSecret)!
+    internal static let shared = TwitterClient(baseURL: URL(string: BaseURL)!, consumerKey: APIKey.consumerKey, consumerSecret: APIKey.consumerSecret)!
     
     internal typealias Failure = (Error?) -> Void
     
@@ -78,6 +78,7 @@ extension TwitterClient {
 // MARK: - Login/Logout
 
 extension TwitterClient {
+    
     // MARK: Login
     
     internal func login(success: @escaping () -> Void, failure: @escaping Failure) {

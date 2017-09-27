@@ -8,24 +8,28 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+internal class HomeViewController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
+    // MARK: Outlets
     
-    var tweets = [Tweet]()
-    var refreshControl: UIRefreshControl!
+    @IBOutlet fileprivate var tableView: UITableView!
     
-    override func viewDidLoad() {
+    // MARK: Stored Properties
+    
+    internal var tweets = [Tweet]()
+    fileprivate var refreshControl: UIRefreshControl!
+    
+    // MARK: Lifecycles
+    
+    internal override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
         fetchData()
-        
-        setupRefreshControl()
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
     }
     
-    @IBAction func onLogout(sender: AnyObject?) {
+    // MARK: Target-Actions
+    
+    @IBAction private func onLogout(sender: AnyObject?) {
         TwitterClient.shared.logout()
     }
     
@@ -35,13 +39,24 @@ class HomeViewController: UIViewController {
 // MARK: - Setup Views
 
 extension HomeViewController {
-    func setupRefreshControl() {
+    
+    fileprivate func setupViews() {
+        setupRefreshControl()
+        setupTableView()
+    }
+    
+    fileprivate func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
     }
     
-    func endRefreshing() {
+    fileprivate func setupTableView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+    }
+    
+    fileprivate func endRefreshing() {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }
@@ -51,7 +66,7 @@ extension HomeViewController {
 // MARK: - Networking
 
 extension HomeViewController {
-    func fetchData() {
+    @objc fileprivate func fetchData() {
         TwitterClient.shared.tweets(from: .homeTimeline) {
             tweets, error in
             if let tweets = tweets {
@@ -69,17 +84,17 @@ extension HomeViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell") as! HomeCell
         cell.tweet = tweets[indexPath.row]
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
     }
 }

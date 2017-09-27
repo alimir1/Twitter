@@ -8,13 +8,17 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+internal class LoginViewController: UIViewController {
 
+    // MARK: Lifecycles
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func onLoginTap(sender: AnyObject?) {
+    // MARK: Target-Actions
+    
+    @IBAction private func onLoginTap(sender: AnyObject?) {
         
         TwitterClient.shared.login(
             success: {
@@ -25,8 +29,10 @@ class LoginViewController: UIViewController {
         })
         
     }
+    
+    // MARK: Helpers
         
-    func handleSuccessfulLogin() {
+    private func handleSuccessfulLogin() {
         let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsNavCtrl") as! UINavigationController
         self.present(tweetsNavVC, animated: true, completion: nil)
     }

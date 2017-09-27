@@ -9,8 +9,6 @@
 import Foundation
 
 extension NSNotification.Name {
-    
-    
     /**
      Posted when user logs out.
      */
@@ -18,6 +16,8 @@ extension NSNotification.Name {
 }
 
 internal class User: NSObject {
+    
+    // MARK: Stored Properties
     
     private(set) var name: String?
     private(set) var createdAt: Date?
@@ -29,8 +29,10 @@ internal class User: NSObject {
     private(set) var followingCount: Int = 0
     private(set) var verified: Bool?
     private(set) var dictionary: NSDictionary?
-    
+
     internal static var currentUser: User?
+    
+    // MARK: Computed Properties
     
     internal static var isUserLoggedIn: Bool = {
         
@@ -59,6 +61,8 @@ internal class User: NSObject {
         }
     }
     
+    // MARK: Initializers
+    
     init(dictionary: NSDictionary) {
         
         self.dictionary = dictionary
@@ -85,6 +89,8 @@ internal class User: NSObject {
         
         self.followingCount = (dictionary["friends_count"] as? Int) ?? 0
     }
+    
+    // MARK: Helpers
     
     internal class func setCurrentUser(user: User) {
         _currentUser = user
