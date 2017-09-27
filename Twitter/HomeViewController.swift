@@ -13,24 +13,16 @@ class HomeViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     var tweets = [Tweet]()
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+        
+        setupRefreshControl()
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-    }
-    
-    @IBAction func onNewButton(sender: AnyObject?) {
-        print("HomeViewController")
-        TwitterClient.shared.tweets(from: .homeTimeline) {
-            tweets, error in
-            if let tweets = tweets {
-                self.tweets = tweets
-                self.tableView.reloadData()
-            } else {
-                print("no tweets here!")
-            }
-        }
     }
     
     @IBAction func onLogout(sender: AnyObject?) {
@@ -39,6 +31,41 @@ class HomeViewController: UIViewController {
     
 }
 
+
+// MARK: - Setup Views
+
+extension HomeViewController {
+    func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+    }
+    
+    func endRefreshing() {
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+    }
+}
+
+// MARK: - Networking
+
+extension HomeViewController {
+    func fetchData() {
+        TwitterClient.shared.tweets(from: .homeTimeline) {
+            tweets, error in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView.reloadData()
+            } else {
+                print("no tweets here!")
+            }
+            self.endRefreshing()
+        }
+    }
+}
+
+// MARK: - TableView
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     

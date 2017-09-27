@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,14 +28,6 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="onLoginTapWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DyZ-Kl-5rd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTs-Zk-Ifa">
-                                <rect key="frame" x="139" y="334" width="88" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Show tweets"/>
-                                <connections>
-                                    <action selector="onShowTweetsWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dKL-sY-o3R"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -68,13 +61,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ustwogames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eh0-ig-fPa">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="ustwogames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eh0-ig-fPa">
                                                     <rect key="frame" x="84" y="8" width="93.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="@ustwogames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifm-FA-ksz">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ustwogames" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifm-FA-ksz">
                                                     <rect key="frame" x="185.5" y="8" width="82.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -99,19 +92,19 @@
                                                         <constraint firstAttribute="height" constant="68" id="SWl-X2-8bC"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="GKz-J6-fEy">
-                                                    <rect key="frame" x="84" y="56.5" width="120" height="22"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="GKz-J6-fEy">
+                                                    <rect key="frame" x="84" y="56.5" width="160" height="22"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Hx-ha0">
                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="22"/>
                                                             <state key="normal" image="Reply"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbi-Hj-wrm">
-                                                            <rect key="frame" x="50" y="0.0" width="20" height="22"/>
+                                                            <rect key="frame" x="70" y="0.0" width="20" height="22"/>
                                                             <state key="normal" image="Retweet"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WII-GX-c3T">
-                                                            <rect key="frame" x="100" y="0.0" width="20" height="22"/>
+                                                            <rect key="frame" x="140" y="0.0" width="20" height="22"/>
                                                             <state key="normal" image="Star"/>
                                                         </button>
                                                     </subviews>
@@ -134,6 +127,7 @@
                                                 <constraint firstItem="Ifm-FA-ksz" firstAttribute="top" secondItem="Iu6-Vx-PnO" secondAttribute="top" constant="8" id="fv5-gY-7dk"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="bJ5-AV-Od5" secondAttribute="bottom" constant="8" id="jus-SF-mYT"/>
                                                 <constraint firstItem="Eh0-ig-fPa" firstAttribute="top" secondItem="Iu6-Vx-PnO" secondAttribute="top" constant="8" id="rXY-mn-7gg"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="GKz-J6-fEy" secondAttribute="trailing" constant="8" id="zde-95-cI1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -165,11 +159,7 @@
                                 <action selector="onLogoutWithSender:" destination="sJM-c0-eVZ" id="LFs-Pu-hjD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="int-Ql-Bn3">
-                            <connections>
-                                <action selector="onNewButtonWithSender:" destination="sJM-c0-eVZ" id="So6-PA-wRK"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="int-Ql-Bn3"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="G3o-bb-6xK" id="cmg-YZ-UPs"/>

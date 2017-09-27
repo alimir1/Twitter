@@ -25,21 +25,7 @@ class LoginViewController: UIViewController {
         })
         
     }
-    
-    @IBAction func onShowTweets(sender: AnyObject?) {
-        TwitterClient.shared.tweets(from: .homeTimeline) {
-            tweets, error in
-            if let tweets = tweets {
-                print("\(tweets.count) tweets:")
-                for (index, tweet) in tweets.enumerated() {
-                    print("user \(index): \(tweet.user!)")
-                }
-            } else {
-                print("no tweets here!")
-            }
-        }
-    }
-    
+        
     func handleSuccessfulLogin() {
         let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsNavCtrl") as! UINavigationController
         self.present(tweetsNavVC, animated: true, completion: nil)
