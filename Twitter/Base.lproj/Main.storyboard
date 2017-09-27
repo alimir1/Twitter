@@ -29,17 +29,26 @@
                                     <action selector="onLoginTapWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DyZ-Kl-5rd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTs-Zk-Ifa">
+                                <rect key="frame" x="139" y="334" width="88" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Show tweets"/>
+                                <connections>
+                                    <action selector="onShowTweetsWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dKL-sY-o3R"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="30" y="130"/>
         </scene>
         <!--Home-->
         <scene sceneID="y47-xz-5vb">
             <objects>
-                <viewController id="sJM-c0-eVZ" sceneMemberID="viewController">
+                <viewController id="sJM-c0-eVZ" customClass="HomeViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Zx-cS-1MV"/>
                         <viewControllerLayoutGuide type="bottom" id="bba-wK-vFu"/>
@@ -50,8 +59,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="zaS-w7-ktr">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="p1C-xT-KLu"/>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="int-Ql-Bn3"/>
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="p1C-xT-KLu">
+                            <connections>
+                                <action selector="onLogoutWithSender:" destination="sJM-c0-eVZ" id="LFs-Pu-hjD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="int-Ql-Bn3">
+                            <connections>
+                                <action selector="onNewButtonWithSender:" destination="sJM-c0-eVZ" id="So6-PA-wRK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVx-wr-1vU" userLabel="First Responder" sceneMemberID="firstResponder"/>

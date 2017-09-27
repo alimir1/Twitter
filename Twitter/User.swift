@@ -8,6 +8,15 @@
 
 import Foundation
 
+extension NSNotification.Name {
+    
+    
+    /**
+     Posted when user logs out.
+     */
+    public static let UserDidLogout = NSNotification.Name("UserDidLogoutNotifictaion")
+}
+
 internal class User: NSObject {
     
     private(set) var name: String?
@@ -22,6 +31,11 @@ internal class User: NSObject {
     
     internal static var currentUser: User?
     
+    internal static var isUserLoggedIn: Bool = {
+        
+        return _currentUser != nil
+    }()
+    
     private class var _currentUser: User? {
         get {
             if currentUser == nil {
@@ -31,7 +45,6 @@ internal class User: NSObject {
                 }
             }
             return currentUser
-        
         }
         
         set(newUser) {
@@ -71,11 +84,13 @@ internal class User: NSObject {
     }
     
     internal class func setCurrentUser(user: User) {
-        User._currentUser = user
+        _currentUser = user
     }
     
     internal class func removeCurrentUser() {
-        User._currentUser = nil
+        UserDefaults.standard.removeObject(forKey: "currentUser")
+        UserDefaults.standard.synchronize()
+        _currentUser = nil
     }
     
 }

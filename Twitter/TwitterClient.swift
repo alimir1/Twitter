@@ -107,6 +107,7 @@ extension TwitterClient {
     // Mark: Logout
     
     internal func logout() {
+        NotificationCenter.default.post(name: NSNotification.Name.UserDidLogout, object: nil)
         User.removeCurrentUser()
         deauthorize()
     }

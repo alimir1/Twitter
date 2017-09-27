@@ -12,24 +12,38 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     @IBAction func onLoginTap(sender: AnyObject?) {
+        
         TwitterClient.shared.login(
             success: {
-                TwitterClient.shared.createAccount {
-                    response, error in
-                }
-                
-                TwitterClient.shared.tweets(from: .homeTimeline) {
-                    response, error in
-                }
+            self.handleSuccessfulLogin()
         },
             failure: {
                 error in
         })
         
     }
+    
+    @IBAction func onShowTweets(sender: AnyObject?) {
+        TwitterClient.shared.tweets(from: .homeTimeline) {
+            tweets, error in
+            if let tweets = tweets {
+                print("\(tweets.count) tweets:")
+                for (index, tweet) in tweets.enumerated() {
+                    print("user \(index): \(tweet.user!)")
+                }
+            } else {
+                print("no tweets here!")
+            }
+        }
+    }
+    
+    func handleSuccessfulLogin() {
+        let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsNavCtrl") as! UINavigationController
+        self.present(tweetsNavVC, animated: true, completion: nil)
+    }
+    
 }
 
