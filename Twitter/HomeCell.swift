@@ -23,6 +23,10 @@ internal class HomeCell: UITableViewCell {
             self.usernameLabel.text = tweet.user!.name
             self.tweetTextLabel.text = tweet.text
             self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
+            
+            if let mediaURL = tweet.mediaURL {
+                print("has media url!!!")
+            }
         }
     }
     

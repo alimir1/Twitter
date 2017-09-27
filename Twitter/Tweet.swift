@@ -18,6 +18,7 @@ internal class Tweet: NSObject {
     private(set) var retweetCount: Int = 0
     private(set) var favoritesCount: Int = 0
     private(set) var isRetweeted: Bool?
+    private(set) var mediaURL: URL?
     
     // MARK: Initializers
     
@@ -31,6 +32,13 @@ internal class Tweet: NSObject {
             formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
             createdAt = formatter.date(from: timeStampString)
         }
+        
+        if let entities = dictionary["entities"] as? NSDictionary, let media = entities["media"] as? [NSDictionary] {
+            if let mediaURL = media[0]["media_url_https"] as? String {
+                self.mediaURL = URL(string: mediaURL)
+            }
+        }
+        
         
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0

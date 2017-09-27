@@ -58,10 +58,10 @@ internal class TwitterClient: BDBOAuth1SessionManager {
 extension TwitterClient {
     // MARK: Get
     
-    fileprivate func getRequest(_ urlString: String, completion: @escaping (_ response: Any?, _ error: Error?) -> Void) {
+    fileprivate func getRequest(_ urlString: String, with parameters: Any? = nil, completion: @escaping (_ response: Any?, _ error: Error?) -> Void) {
         get(
             urlString,
-            parameters: nil,
+            parameters: parameters,
             progress: nil,
             success: {
                 task, response in
@@ -138,7 +138,7 @@ extension TwitterClient {
             requestURLString = RequestURL.timeline
         }
         
-        getRequest(requestURLString) {
+        getRequest(requestURLString, with: ["include_entities" : true]) {
             response, error in
             if let response = response {
                 let timeline = Tweet.tweets(from: response as! [NSDictionary])

@@ -63,8 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				494483AB1F7AB61D009A099C /* LoginViewController.swift */,
-				4924167F1F7AFDF300AB0E97 /* HomeViewController.swift */,
-				492416821F7B49B500AB0E97 /* HomeCell.swift */,
+				4992A7F31F7BFC43002F8643 /* HomeViewController */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -108,6 +107,15 @@
 				494483BC1F7AC758009A099C /* TwitterClient.swift */,
 			);
 			name = TwitterAPI;
+			sourceTree = "<group>";
+		};
+		4992A7F31F7BFC43002F8643 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4924167F1F7AFDF300AB0E97 /* HomeViewController.swift */,
+				492416821F7B49B500AB0E97 /* HomeCell.swift */,
+			);
+			name = HomeViewController;
 			sourceTree = "<group>";
 		};
 		5A79F4DDF2503A858AF3E766 /* Frameworks */ = {
