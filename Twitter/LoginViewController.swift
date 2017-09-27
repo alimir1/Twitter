@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 internal class LoginViewController: UIViewController {
 
@@ -19,13 +20,15 @@ internal class LoginViewController: UIViewController {
     // MARK: Target-Actions
     
     @IBAction private func onLoginTap(sender: AnyObject?) {
-        
+        MBProgressHUD.showAdded(to: view, animated: true)
         TwitterClient.shared.login(
             success: {
-            self.handleSuccessfulLogin()
+                self.handleSuccessfulLogin()
+                MBProgressHUD.hide(for: self.view, animated: true)
         },
             failure: {
                 error in
+                MBProgressHUD.hide(for: self.view, animated: true)
         })
         
     }

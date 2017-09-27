@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 internal class HomeViewController: UIViewController {
     
@@ -67,6 +68,7 @@ extension HomeViewController {
 
 extension HomeViewController {
     @objc fileprivate func fetchData() {
+        MBProgressHUD.showAdded(to: view, animated: true)
         TwitterClient.shared.tweets(from: .homeTimeline) {
             tweets, error in
             if let tweets = tweets {
@@ -77,6 +79,7 @@ extension HomeViewController {
                 print(error!.localizedDescription)
             }
             self.endRefreshing()
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
 }
