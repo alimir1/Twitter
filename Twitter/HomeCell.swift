@@ -9,6 +9,8 @@
 import UIKit
 
 internal class HomeCell: UITableViewCell {
+    
+    // MARK: Outlets
 
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet internal var mediaImageView: UIImageView!
@@ -16,6 +18,8 @@ internal class HomeCell: UITableViewCell {
     @IBOutlet private var usernameLabel: UILabel!
     @IBOutlet private var tweetTextLabel: UILabel!
     @IBOutlet private var timeStampLabel: UILabel!
+    
+    // MARK: Property Observers
     
     internal var tweet: Tweet! {
         didSet {
@@ -26,6 +30,8 @@ internal class HomeCell: UITableViewCell {
             self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
         }
     }
+    
+    // MARK: Lifecycles
     
     override func awakeFromNib() {
         super.awakeFromNib()
