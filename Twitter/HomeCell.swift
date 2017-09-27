@@ -26,29 +26,15 @@ internal class HomeCell: UITableViewCell {
     
     internal var tweet: Tweet! {
         didSet {
-            self.tweetTextLabel.text = tweet.text
-            self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
-            self.retweeterNameLabel.text = "\(tweet.user!.name!) retweeted"
-            self.mediaImageView.image = nil
-            self.topConstraint.constant = 8
-            
+            setupCell()
             if let mediaURL = tweet.mediaURL {
                 mediaImageView.setImageWith(mediaURL)
             }
-            
             guard !tweet.isRetweetedTweet else {
-                self.profileImageView.setImageWith(tweet.retweetSourceUser!.profileURL!)
-                self.usernameSmallLabel.text = "@\(tweet.retweetSourceUser!.screenName!)"
-                self.usernameLabel.text = tweet.retweetSourceUser?.name
-                retweetStackView.isHidden = false
-                self.topConstraint.constant = 24
+                setupCellForRetweetedTweet()
                 return
             }
-            
-            retweetStackView.isHidden = true
-            self.profileImageView.setImageWith(tweet.user!.profileURL!)
-            self.usernameSmallLabel.text = "@\(tweet.user!.screenName!)"
-            self.usernameLabel.text = tweet.user?.name
+            setupCellForNonRetweetedTweet()
         }
     }
     
@@ -60,12 +46,27 @@ internal class HomeCell: UITableViewCell {
         mediaImageView.layer.cornerRadius = 5
     }
     
-    private func setupCellForRetweetedTweet() {
-    
+    private func setupCell() {
+        self.tweetTextLabel.text = tweet.text
+        self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
+        self.retweeterNameLabel.text = "\(tweet.user!.name!) retweeted"
+        self.mediaImageView.image = nil
+        self.topConstraint.constant = 8
     }
     
-    private func setupCell() {
-        
+    private func setupCellForRetweetedTweet() {
+        self.profileImageView.setImageWith(tweet.retweetSourceUser!.profileURL!)
+        self.usernameSmallLabel.text = "@\(tweet.retweetSourceUser!.screenName!)"
+        self.usernameLabel.text = tweet.retweetSourceUser?.name
+        retweetStackView.isHidden = false
+        self.topConstraint.constant = 24
+    }
+    
+    private func setupCellForNonRetweetedTweet() {
+        retweetStackView.isHidden = true
+        self.profileImageView.setImageWith(tweet.user!.profileURL!)
+        self.usernameSmallLabel.text = "@\(tweet.user!.screenName!)"
+        self.usernameLabel.text = tweet.user?.name
     }
     
 }
