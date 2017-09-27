@@ -20,15 +20,17 @@ internal class HomeCell: UITableViewCell {
     @IBOutlet private var timeStampLabel: UILabel!
     @IBOutlet private var retweetStackView: UIStackView!
     @IBOutlet private var retweeterNameLabel: UILabel!
+    @IBOutlet var topConstraint: NSLayoutConstraint!
     
     // MARK: Property Observers
     
     internal var tweet: Tweet! {
         didSet {
-            
             self.tweetTextLabel.text = tweet.text
             self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
             self.retweeterNameLabel.text = "\(tweet.user!.name!) retweeted"
+            self.mediaImageView.image = nil
+            self.topConstraint.constant = 8
             
             if let mediaURL = tweet.mediaURL {
                 mediaImageView.setImageWith(mediaURL)
@@ -40,6 +42,7 @@ internal class HomeCell: UITableViewCell {
                 self.usernameSmallLabel.text = "@\(tweet.retweetSourceUser!.screenName!)"
                 self.usernameLabel.text = tweet.retweetSourceUser?.name
                 retweetStackView.isHidden = false
+                self.topConstraint.constant = 24
                 return
             }
             
@@ -57,4 +60,13 @@ internal class HomeCell: UITableViewCell {
         profileImageView.layer.cornerRadius = 5
         mediaImageView.layer.cornerRadius = 5
     }
+    
+    private func setupCellForRetweetedTweet() {
+    
+    }
+    
+    private func setupCell() {
+        
+    }
+    
 }
