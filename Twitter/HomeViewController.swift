@@ -23,8 +23,8 @@ internal class HomeViewController: UIViewController {
     
     internal override func viewDidLoad() {
         super.viewDidLoad()
-//        setupViews()
-//        fetchData()
+        setupViews()
+        fetchData()
     }
     
     // MARK: Target-Actions
@@ -91,7 +91,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell") as! HomeCell
-        cell.tweet = tweets[indexPath.row]
+        let tweet = tweets[indexPath.row]
+        cell.tweet = tweet
+        if let mediaURL = tweet.mediaURL {
+            cell.mediaImageView.setImageWith(mediaURL)
+        }
         return cell
     }
     

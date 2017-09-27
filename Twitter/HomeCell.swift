@@ -11,7 +11,7 @@ import UIKit
 internal class HomeCell: UITableViewCell {
 
     @IBOutlet private var profileImageView: UIImageView!
-    @IBOutlet private var mediaImageView: UIImageView!
+    @IBOutlet internal var mediaImageView: UIImageView!
     @IBOutlet private var usernameSmallLabel: UILabel!
     @IBOutlet private var usernameLabel: UILabel!
     @IBOutlet private var tweetTextLabel: UILabel!
@@ -24,12 +24,6 @@ internal class HomeCell: UITableViewCell {
             self.usernameLabel.text = tweet.user!.name
             self.tweetTextLabel.text = tweet.text
             self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
-            
-            if let mediaURL = tweet.mediaURL {
-                mediaImageView.setImageWith(mediaURL)
-            } else {
-                mediaImageView.image = nil
-            }
         }
     }
     
