@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
             if let tweets = tweets {
                 print("\(tweets.count) tweets:")
                 for (index, tweet) in tweets.enumerated() {
-                    print("user \(index): \(tweet.user!)")
+                    print("verified \(index): \(tweet.user!.verified!)")
                 }
             } else {
                 print("no tweets here!")

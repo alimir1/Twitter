@@ -15,6 +15,7 @@ internal class Tweet: NSObject {
     private(set) var text: String?
     private(set) var retweetCount: Int = 0
     private(set) var favoritesCount: Int = 0
+    private(set) var isRetweeted: Bool?
     
     init(dictionary: NSDictionary) {
         if let userDict = dictionary["user"] as? NSDictionary {
@@ -30,6 +31,8 @@ internal class Tweet: NSObject {
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoritesCount = (dictionary["favorite_count"] as? Int) ?? 0
+        
+        isRetweeted = dictionary["retweeted"] as? Bool
         
     }
     

@@ -27,6 +27,7 @@ internal class User: NSObject {
     private(set) var profileURL: URL?
     private(set) var tweetsCount: Int = 0
     private(set) var followingCount: Int = 0
+    private(set) var verified: Bool?
     private(set) var dictionary: NSDictionary?
     
     internal static var currentUser: User?
@@ -71,6 +72,8 @@ internal class User: NSObject {
         tagline = dictionary["description"] as? String
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
+        
+        verified = dictionary["verified"] as? Bool
         
         self.followersCount = (dictionary["followers_count"] as? Int) ?? 0
         
