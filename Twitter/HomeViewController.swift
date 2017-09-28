@@ -17,18 +17,19 @@ internal class HomeViewController: UIViewController {
     
     // MARK: Stored Properties
     
-    
     fileprivate var refreshControl: UIRefreshControl!
     
     internal var tweets = [Tweet]() {
         didSet {
             for (index, tweet) in tweets.enumerated() {
                 favoritedTweets[index] = tweet.isFavorited
+                retweetedTweets[index] = tweet.isRetweeted
             }
         }
     }
     
     fileprivate var favoritedTweets = [Int : Bool]()
+    fileprivate var retweetedTweets = [Int : Bool]()
     
     // MARK: Lifecycles
     
@@ -119,6 +120,10 @@ extension HomeViewController: HomeCellDelegate {
                 self.favoritedTweets[indexPath.row] = isFavorite
                 self.tweets[indexPath.row].isFavorited = isFavorite
                 cell.isFavorited = isFavorite
+                let favoritesCount = self.tweets[indexPath.row].favoritesCount
+                let resetFavoritesCount = isFavorite ? favoritesCount + 1 : favoritesCount - 1
+                self.tweets[indexPath.row].setFavCount(resetFavoritesCount)
+                cell.tweet = self.tweets[indexPath.row]
             }
         }
     }
@@ -138,6 +143,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.tweet = tweet
         cell.delegate = self
         cell.isFavorited = favoritedTweets[indexPath.row] ?? false
+        cell.isRetweeted = retweetedTweets[indexPath.row] ?? false
         return cell
     }
     

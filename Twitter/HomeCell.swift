@@ -36,27 +36,17 @@ internal class HomeCell: UITableViewCell {
     internal var tweet: Tweet! {
         didSet {
             setupCell()
-            if let mediaURL = tweet.mediaURL {
-                mediaImageView.setImageWith(mediaURL)
-            }
-            guard !tweet.isRetweetedTweet else {
-                setupCellForRetweetedTweet()
-                return
-            }
-            
-            setupCellForNonRetweetedTweet()
-            
-            if let inReplyTo = tweet.inReplyToScreenName {
-                retweeterNameLabel.text = "Replying to @\(inReplyTo)"
-                retweetStackView.isHidden = false
-                topConstraint.constant = 24
-            }
         }
     }
     
     internal var isFavorited: Bool = false {
         didSet {
             updateLikeButton()
+        }
+    }
+    internal var isRetweeted: Bool = false {
+        didSet {
+            updateRetweetedButton()
         }
     }
     
@@ -78,11 +68,33 @@ internal class HomeCell: UITableViewCell {
         mediaImageView.image = nil
         topConstraint.constant = 8
         setupButtons()
+        
+        if let mediaURL = tweet.mediaURL {
+            mediaImageView.setImageWith(mediaURL)
+        }
+        guard !tweet.isRetweetedTweet else {
+            setupCellForRetweetedTweet()
+            return
+        }
+        
+        setupCellForNonRetweetedTweet()
+        
+        if let inReplyTo = tweet.inReplyToScreenName {
+            retweeterNameLabel.text = "Replying to @\(inReplyTo)"
+            retweetStackView.isHidden = false
+            topConstraint.constant = 24
+        }
     }
     
     private func setupButtons() {
         favoratedButon.setImage(#imageLiteral(resourceName: "HeartFilled"), for: .selected)
         favoratedButon.setImage(#imageLiteral(resourceName: "HeartUnfilled"), for: .normal)
+        retweetButon.setImage(#imageLiteral(resourceName: "RetweetFilled"), for: .selected)
+        retweetButon.setImage(#imageLiteral(resourceName: "RetweetUnfilled"), for: .normal)
+        let retweeetTitleText = tweet.retweetCount > 0 ? "   \(tweet.retweetCount)" : nil
+        let favoriteTitleText = tweet.favoritesCount > 0 ? "   \(tweet.favoritesCount)" : nil
+        retweetButon.setTitle(retweeetTitleText, for: .normal)
+        favoratedButon.setTitle(favoriteTitleText, for: .normal)
     }
     
     private func setupCellForRetweetedTweet() {
@@ -119,5 +131,9 @@ internal class HomeCell: UITableViewCell {
     
     private func updateLikeButton() {
         favoratedButon.isSelected = isFavorited
+    }
+    
+    private func updateRetweetedButton() {
+        retweetButon.isSelected = isRetweeted
     }
 }

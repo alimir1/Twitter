@@ -24,6 +24,7 @@ internal class Tweet: NSObject {
     private(set) var id: Int64?
     
     internal var isFavorited: Bool = false
+    internal var isRetweeted: Bool = false
     
     // MARK: Initializers
     
@@ -63,11 +64,20 @@ internal class Tweet: NSObject {
         }
         
         isFavorited = (dictionary["favorited"] as? NSNumber ?? 0) != 0
+        isRetweeted = (dictionary["retweeted"] as? NSNumber ?? 0) != 0
     }
     
     // MARK: Helpers
     
     internal class func tweets(from dictionaries: [NSDictionary]) -> [Tweet] {
         return dictionaries.map {Tweet(dictionary: $0)}
+    }
+    
+    internal func setRetweetsCount(_ count: Int) {
+        self.retweetCount = count
+    }
+    
+    internal func setFavCount(_ count: Int) {
+        self.favoritesCount = count
     }
 }
