@@ -111,9 +111,17 @@ extension HomeViewController: HomeCellDelegate {
     
     func homeCell(_ cell: HomeCell, didTapFavorite with: Tweet, isFavorite: Bool) {
         let indexPath = tableView.indexPath(for: cell)!
-        favoritedTweets[indexPath.row] = isFavorite
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        TwitterClient.shared.changeLike(isLiked: isFavorite, id: with.id!) {
+            success, error in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if success {
+                self.favoritedTweets[indexPath.row] = isFavorite
+                self.tweets[indexPath.row].isFavorited = isFavorite
+                cell.isFavorited = isFavorite
+            }
+        }
     }
-    
 }
 
 // MARK: - TableView

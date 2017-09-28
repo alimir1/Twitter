@@ -195,9 +195,10 @@ extension TwitterClient {
         }
     }
     
-    internal func like(id: Int64, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    internal func changeLike(isLiked: Bool, id: Int64, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         let parameters = ["id" : id]
-        postRequest(RequestURL.createFavorites, with: parameters) {
+        let requestURLString = isLiked ? RequestURL.createFavorites : RequestURL.destroyFavorites
+        postRequest(requestURLString, with: parameters) {
             response, error in
             if response != nil {
                 completion(true, error)
@@ -237,6 +238,7 @@ extension TwitterClient {
         static let update = "1.1/statuses/update.json"
         static let accountVerifyCredentials = "1.1/account/verify_credentials.json"
         static let createFavorites = "1.1/favorites/create.json"
+        static let destroyFavorites = "1.1/favorites/destroy.json"
         static func retweet(_ id: Int64) -> String {
             return "1.1/statuses/retweet/\(id).json"
         }

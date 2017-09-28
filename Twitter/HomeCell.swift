@@ -51,13 +51,12 @@ internal class HomeCell: UITableViewCell {
                 retweetStackView.isHidden = false
                 topConstraint.constant = 24
             }
-            
         }
     }
     
     internal var isFavorited: Bool = false {
         didSet {
-            favoratedButon.isSelected = isFavorited
+            updateLikeButton()
         }
     }
     
@@ -113,9 +112,12 @@ internal class HomeCell: UITableViewCell {
     }
     
     @IBAction func onFavoritesTap(_ sender: UIButton) {
-        isFavorited = !isFavorited
-        delegate?.homeCell?(self, didTapFavorite: tweet, isFavorite: isFavorited)
+        delegate?.homeCell?(self, didTapFavorite: tweet, isFavorite: !isFavorited)
     }
     
+    // MARK: Helpers
     
+    private func updateLikeButton() {
+        favoratedButon.isSelected = isFavorited
+    }
 }

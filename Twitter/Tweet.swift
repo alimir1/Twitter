@@ -18,11 +18,12 @@ internal class Tweet: NSObject {
     private(set) var retweetCount: Int = 0
     private(set) var favoritesCount: Int = 0
     private(set) var mediaURL: URL?
-    private(set) var isFavorited: Bool = false
     private(set) var isRetweetedTweet: Bool = false
     private(set) var inReplyToScreenName: String?
     private(set) var retweetSourceUser: User?
     private(set) var id: Int64?
+    
+    internal var isFavorited: Bool = false
     
     // MARK: Initializers
     
