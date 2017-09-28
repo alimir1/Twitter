@@ -82,7 +82,7 @@ internal class PostViewController: UIViewController {
     @IBAction private func onPostTweet(sender: UIButton?) {
         guard !tweetTextView.text.isEmpty else { return } // FIXME: display more meaningful message to user!
         MBProgressHUD.showAdded(to: view, animated: true)
-        TwitterClient.shared.post(tweet: tweetTextView.text) {
+        TwitterClient.shared.post(tweet: tweetTextView.text, idForReply: nil) {
             didSuccessfullyPost, potentialError in
             if didSuccessfullyPost {
                 self.dismiss(animated: true, completion: nil)

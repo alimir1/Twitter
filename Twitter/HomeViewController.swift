@@ -84,6 +84,16 @@ extension HomeViewController {
     }
 }
 
+// MARK: - HomeCellDelegate
+
+extension HomeViewController: HomeCellDelegate {
+    func homeCell(_ cell: HomeCell, didTapReply with: Tweet) {
+        let replyVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "replyVC") as! ReplyViewController
+        replyVC.replyingToTweet = with
+        present(replyVC, animated: true, completion: nil)
+    }
+}
+
 // MARK: - TableView
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -96,6 +106,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell") as! HomeCell
         let tweet = tweets[indexPath.row]
         cell.tweet = tweet
+        cell.delegate = self
         return cell
     }
     

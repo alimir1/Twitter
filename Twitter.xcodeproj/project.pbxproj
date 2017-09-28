@@ -19,6 +19,7 @@
 		494483B41F7AB61D009A099C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 494483B21F7AB61D009A099C /* LaunchScreen.storyboard */; };
 		494483BD1F7AC758009A099C /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483BC1F7AC758009A099C /* TwitterClient.swift */; };
 		4992A7F51F7C0AB4002F8643 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992A7F41F7C0AB4002F8643 /* PostViewController.swift */; };
+		4992A7F71F7C53B3002F8643 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992A7F61F7C53B3002F8643 /* ReplyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		494483B51F7AB61D009A099C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		494483BC1F7AC758009A099C /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		4992A7F41F7C0AB4002F8643 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		4992A7F61F7C53B3002F8643 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
 		A013B7958590E38E24B4EA28 /* Pods-Twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 			children = (
 				494483AB1F7AB61D009A099C /* LoginViewController.swift */,
 				4992A7F41F7C0AB4002F8643 /* PostViewController.swift */,
+				4992A7F61F7C53B3002F8643 /* ReplyViewController.swift */,
 				4992A7F31F7BFC43002F8643 /* HomeViewController */,
 			);
 			name = Controllers;
@@ -273,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4992A7F51F7C0AB4002F8643 /* PostViewController.swift in Sources */,
+				4992A7F71F7C53B3002F8643 /* ReplyViewController.swift in Sources */,
 				4924167E1F7ADEE900AB0E97 /* Tweet.swift in Sources */,
 				492416831F7B49B500AB0E97 /* HomeCell.swift in Sources */,
 				494483AC1F7AB61D009A099C /* LoginViewController.swift in Sources */,

@@ -163,9 +163,17 @@ extension TwitterClient {
         }
     }
     
-    internal func post(tweet text: String, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    internal func post(tweet status: String, idForReply id: Int64?, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         
-        postRequest(RequestURL.update, with: ["status" : text]) {
+        var parameters = [String : Any]()
+        
+        parameters["status"] = status
+        
+        if let id = id {
+            parameters["in_reply_to_status_id"] = id
+        }
+        
+        postRequest(RequestURL.update, with: parameters) {
             response, error in
             if response != nil {
                 completion(true, error)

@@ -19,7 +19,9 @@ internal class Tweet: NSObject {
     private(set) var favoritesCount: Int = 0
     private(set) var mediaURL: URL?
     private(set) var isRetweetedTweet: Bool = false
+    private(set) var inReplyToScreenName: String?
     private(set) var retweetSourceUser: User?
+    private(set) var id: Int64?
     
     // MARK: Initializers
     
@@ -40,16 +42,16 @@ internal class Tweet: NSObject {
             }
         }
         
+        id = dictionary["id"] as? Int64
         
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoritesCount = (dictionary["favorite_count"] as? Int) ?? 0
         
-        /*if let retweeted = dictionary["retweeted"] as? NSNumber {
-            print("retweeted: \(retweeted)")
-            isRetweeted = retweeted != 0
-            print(dictionary)
-        }*/
+        if let replyScreenName = dictionary["in_reply_to_screen_name"] as? String {
+            inReplyToScreenName = replyScreenName
+        }
+        
         
         if let retweetStatus = dictionary["retweeted_status"] as? NSDictionary {
             // it's a retweeted tweet

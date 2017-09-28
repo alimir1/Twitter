@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol HomeCellDelegate: class {
-    @objc optional func homeCell(_ cell: HomeCell, didTapReplyButton with: UIButton)
+    @objc optional func homeCell(_ cell: HomeCell, didTapReply with: Tweet)
 }
 
 internal class HomeCell: UITableViewCell {
@@ -38,7 +38,15 @@ internal class HomeCell: UITableViewCell {
                 setupCellForRetweetedTweet()
                 return
             }
+            
             setupCellForNonRetweetedTweet()
+            
+            if let inReplyTo = tweet.inReplyToScreenName {
+                self.retweeterNameLabel.text = "Replying to @\(inReplyTo)"
+                retweetStackView.isHidden = false
+                self.topConstraint.constant = 24
+            }
+            
         }
     }
     
@@ -57,7 +65,6 @@ internal class HomeCell: UITableViewCell {
     private func setupCell() {
         self.tweetTextLabel.text = tweet.text
         self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
-        self.retweeterNameLabel.text = "\(tweet.user!.name!) retweeted"
         self.mediaImageView.image = nil
         self.topConstraint.constant = 8
     }
@@ -66,6 +73,7 @@ internal class HomeCell: UITableViewCell {
         self.profileImageView.setImageWith(tweet.retweetSourceUser!.profileURL!)
         self.usernameSmallLabel.text = "@\(tweet.retweetSourceUser!.screenName!)"
         self.usernameLabel.text = tweet.retweetSourceUser?.name
+        self.retweeterNameLabel.text = "\(tweet.user!.name!) retweeted"
         retweetStackView.isHidden = false
         self.topConstraint.constant = 24
     }
@@ -79,8 +87,8 @@ internal class HomeCell: UITableViewCell {
     
     // MARK: Target-action
     
-    @IBAction func onReply(_ sender: UIButton) {
-        delegate?.homeCell?(self, didTapReplyButton: sender)
+    @IBAction func onReplyTap(sender: AnyObject?) {
+        delegate?.homeCell?(self, didTapReply: tweet)
     }
     
     
