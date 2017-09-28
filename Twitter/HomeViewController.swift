@@ -22,13 +22,13 @@ internal class HomeViewController: UIViewController {
     internal var tweets = [Tweet]() {
         didSet {
             for (index, tweet) in tweets.enumerated() {
-                favoritedTweets[index] = tweet.isFavorited
+                favoriteTweets[index] = tweet.isFavorited
                 retweetedTweets[index] = tweet.isRetweeted
             }
         }
     }
     
-    fileprivate var favoritedTweets = [Int : Bool]()
+    fileprivate var favoriteTweets = [Int : Bool]()
     fileprivate var retweetedTweets = [Int : Bool]()
     
     // MARK: Lifecycles
@@ -106,7 +106,13 @@ extension HomeViewController: HomeCellDelegate {
     
     func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet) {
         let retweetVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "retweetVC") as! RetweetViewController
+        let indexPath = tableView.indexPath(for: cell)!
         retweetVC.tweet = with
+        retweetVC.retweetAction = {
+            isRetweeted in
+            self.handleUpdatedRetwet(indexPath: indexPath, isRetweeted: isRetweeted, cell: cell)
+        }
+        
         present(retweetVC, animated: false, completion: nil)
     }
     
@@ -117,15 +123,34 @@ extension HomeViewController: HomeCellDelegate {
             success, error in
             MBProgressHUD.hide(for: self.view, animated: true)
             if success {
-                self.favoritedTweets[indexPath.row] = isFavorite
-                self.tweets[indexPath.row].isFavorited = isFavorite
-                cell.isFavorited = isFavorite
-                let favoritesCount = self.tweets[indexPath.row].favoritesCount
-                let resetFavoritesCount = isFavorite ? favoritesCount + 1 : favoritesCount - 1
-                self.tweets[indexPath.row].setFavCount(resetFavoritesCount)
-                cell.tweet = self.tweets[indexPath.row]
+                self.handleUpdatedFavorite(indexPath: indexPath, isFavorite: isFavorite, cell: cell)
+            } else {
+                print(error!.localizedDescription)
             }
         }
+    }
+    
+    // MARK: Handlers
+    
+    func handleUpdatedRetwet(indexPath: IndexPath, isRetweeted: Bool, cell: HomeCell) {
+        guard isRetweeted else { return }
+        self.retweetedTweets[indexPath.row] = isRetweeted
+        self.tweets[indexPath.row].isRetweeted = isRetweeted
+        cell.isRetweeted = isRetweeted
+        let retweetedCount = self.tweets[indexPath.row].retweetCount
+        let resetRetweetCount = isRetweeted ? retweetedCount + 1 : retweetedCount - 1
+        self.tweets[indexPath.row].setRetweetsCount(resetRetweetCount)
+        cell.tweet = self.tweets[indexPath.row]
+    }
+    
+    func handleUpdatedFavorite(indexPath: IndexPath, isFavorite: Bool, cell: HomeCell) {
+        self.favoriteTweets[indexPath.row] = isFavorite
+        self.tweets[indexPath.row].isFavorited = isFavorite
+        cell.isFavorited = isFavorite
+        let favoritesCount = self.tweets[indexPath.row].favoritesCount
+        let resetFavoritesCount = isFavorite ? favoritesCount + 1 : favoritesCount - 1
+        self.tweets[indexPath.row].setFavCount(resetFavoritesCount)
+        cell.tweet = self.tweets[indexPath.row]
     }
 }
 
@@ -142,7 +167,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let tweet = tweets[indexPath.row]
         cell.tweet = tweet
         cell.delegate = self
-        cell.isFavorited = favoritedTweets[indexPath.row] ?? false
+        cell.isFavorited = favoriteTweets[indexPath.row] ?? false
         cell.isRetweeted = retweetedTweets[indexPath.row] ?? false
         return cell
     }

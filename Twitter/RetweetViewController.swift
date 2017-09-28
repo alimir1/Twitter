@@ -24,6 +24,7 @@ internal class RetweetViewController: UIViewController {
     // MARK: Stored Properties
     
     internal var tweet: Tweet!
+    internal var retweetAction: ((Bool) -> Void)?
     
     // MARK: Lifecycles
     
@@ -83,6 +84,7 @@ internal class RetweetViewController: UIViewController {
                 return
             }
             print("retweet success!")
+            self.retweetAction?(true)
             self.dismissVC()
         }
     }
