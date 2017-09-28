@@ -11,6 +11,7 @@ import UIKit
 @objc protocol HomeCellDelegate: class {
     @objc optional func homeCell(_ cell: HomeCell, didTapReply with: Tweet)
     @objc optional func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet)
+    @objc optional func homeCell(_ cell: HomeCell, didTapFavorite with: Tweet, isFavorite: Bool)
 }
 
 internal class HomeCell: UITableViewCell {
@@ -25,7 +26,10 @@ internal class HomeCell: UITableViewCell {
     @IBOutlet private var timeStampLabel: UILabel!
     @IBOutlet private var retweetStackView: UIStackView!
     @IBOutlet private var retweeterNameLabel: UILabel!
-    @IBOutlet var topConstraint: NSLayoutConstraint!
+    @IBOutlet private var favoratedButon: UIButton!
+    @IBOutlet private var replyButon: UIButton!
+    @IBOutlet private var retweetButon: UIButton!
+    @IBOutlet private var topConstraint: NSLayoutConstraint!
     
     // MARK: Property Observers
     
@@ -95,5 +99,10 @@ internal class HomeCell: UITableViewCell {
     @IBAction private func onRetweetTap(_ sender: UIButton) {
         delegate?.homeCell?(self, didTapRetwet: tweet)
     }
+    
+    @IBAction func onFavoritesTap(_ sender: UIButton) {
+        delegate?.homeCell?(self, didTapFavorite: tweet, isFavorite: true)
+    }
+    
     
 }

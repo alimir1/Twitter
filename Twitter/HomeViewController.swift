@@ -17,8 +17,10 @@ internal class HomeViewController: UIViewController {
     
     // MARK: Stored Properties
     
-    internal var tweets = [Tweet]()
+    
     fileprivate var refreshControl: UIRefreshControl!
+    
+    internal var tweets = [Tweet]()
     
     // MARK: Lifecycles
     
@@ -97,6 +99,10 @@ extension HomeViewController: HomeCellDelegate {
         let retweetVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "retweetVC") as! RetweetViewController
         retweetVC.tweet = with
         present(retweetVC, animated: false, completion: nil)
+    }
+    
+    func homeCell(_ cell: HomeCell, didTapFavorite with: Tweet, isFavorite: Bool) {
+        
     }
     
 }

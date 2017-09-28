@@ -105,6 +105,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WII-GX-c3T" userLabel="Favorite Button">
                                                             <rect key="frame" x="150" y="0.0" width="25" height="25"/>
                                                             <state key="normal" image="HeartUnfilled"/>
+                                                            <connections>
+                                                                <action selector="onFavoritesTap:" destination="HTY-bJ-H97" eventType="touchUpInside" id="Ckc-vq-15p"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -166,8 +169,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="favoratedButon" destination="WII-GX-c3T" id="kZV-Ju-YOt"/>
                                             <outlet property="mediaImageView" destination="o5C-Xy-MKc" id="SUg-Nd-wFQ"/>
                                             <outlet property="profileImageView" destination="bJ5-AV-Od5" id="qle-6N-kTn"/>
+                                            <outlet property="replyButon" destination="59z-Hx-ha0" id="RWl-kc-rqn"/>
+                                            <outlet property="retweetButon" destination="Mbi-Hj-wrm" id="vFh-Qv-89H"/>
                                             <outlet property="retweetStackView" destination="TZM-Vl-e7l" id="hL2-OH-v9C"/>
                                             <outlet property="retweeterNameLabel" destination="aCb-F6-7il" id="EhM-ks-kwn"/>
                                             <outlet property="timeStampLabel" destination="RkP-b2-2TT" id="fCY-Id-dQb"/>
