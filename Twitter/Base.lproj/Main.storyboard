@@ -382,7 +382,7 @@
                                     </subviews>
                                 </view>
                                 <gestureRecognizers/>
-                                <blurEffect style="light"/>
+                                <blurEffect style="dark"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="I6d-7l-7Dv" appends="YES" id="zPb-aP-Bgx"/>
                                 </connections>
@@ -393,7 +393,6 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y Combinator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjQ-kX-FWU">
                                         <rect key="frame" x="84" y="8" width="113" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pYr-XX-uSE">
@@ -406,13 +405,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="@ycombinator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64l-ev-0Pd">
                                         <rect key="frame" x="205" y="8" width="122" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here is some text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQO-N7-Vnz">
                                         <rect key="frame" x="84" y="37" width="243" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rQL-KI-2Y9" userLabel="Retweet View">
@@ -420,15 +417,16 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekE-yc-4We">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <state key="normal" title="Retweet">
-                                                    <color key="titleColor" red="1" green="0.062189949986007464" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="onRetweet:" destination="uem-rb-I5b" eventType="touchUpInside" id="vn2-Fu-cie"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="1" green="0.39870127831565216" blue="0.40782441917133816" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="ekE-yc-4We" firstAttribute="leading" secondItem="rQL-KI-2Y9" secondAttribute="leading" id="3HP-t7-BV7"/>
                                             <constraint firstAttribute="trailing" secondItem="ekE-yc-4We" secondAttribute="trailing" id="Mes-we-WWO"/>
@@ -438,7 +436,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.69577854199149014" green="0.74608624691970227" blue="0.75701530612244894" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="rQL-KI-2Y9" firstAttribute="leading" secondItem="sUV-Nb-Ukd" secondAttribute="leading" id="3aw-sc-PCr"/>
                                     <constraint firstItem="MjQ-kX-FWU" firstAttribute="top" secondItem="pYr-XX-uSE" secondAttribute="top" id="8Bd-N7-T8E"/>
