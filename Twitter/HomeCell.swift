@@ -10,14 +10,15 @@ import UIKit
 
 @objc protocol HomeCellDelegate: class {
     @objc optional func homeCell(_ cell: HomeCell, didTapReply with: Tweet)
+    @objc optional func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet)
 }
 
 internal class HomeCell: UITableViewCell {
     
     // MARK: Outlets
 
-    @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet internal var mediaImageView: UIImageView!
+    @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var usernameSmallLabel: UILabel!
     @IBOutlet private var usernameLabel: UILabel!
     @IBOutlet private var tweetTextLabel: UILabel!
@@ -87,9 +88,12 @@ internal class HomeCell: UITableViewCell {
     
     // MARK: Target-action
     
-    @IBAction func onReplyTap(sender: AnyObject?) {
+    @IBAction private func onReplyTap(sender: AnyObject?) {
         delegate?.homeCell?(self, didTapReply: tweet)
     }
     
+    @IBAction private func onRetweetTap(_ sender: UIButton) {
+        delegate?.homeCell?(self, didTapRetwet: tweet)
+    }
     
 }

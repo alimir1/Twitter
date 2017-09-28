@@ -92,6 +92,13 @@ extension HomeViewController: HomeCellDelegate {
         replyVC.replyingToTweet = with
         present(replyVC, animated: true, completion: nil)
     }
+    
+    func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet) {
+        let retweetVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "retweetVC") as! RetweetViewController
+        retweetVC.tweet = with
+        present(retweetVC, animated: false, completion: nil)
+    }
+    
 }
 
 // MARK: - TableView

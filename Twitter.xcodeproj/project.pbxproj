@@ -20,6 +20,7 @@
 		494483BD1F7AC758009A099C /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494483BC1F7AC758009A099C /* TwitterClient.swift */; };
 		4992A7F51F7C0AB4002F8643 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992A7F41F7C0AB4002F8643 /* PostViewController.swift */; };
 		4992A7F71F7C53B3002F8643 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992A7F61F7C53B3002F8643 /* ReplyViewController.swift */; };
+		4992A81B1F7CB127002F8643 /* RetweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4992A81A1F7CB127002F8643 /* RetweetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		494483BC1F7AC758009A099C /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		4992A7F41F7C0AB4002F8643 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		4992A7F61F7C53B3002F8643 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
+		4992A81A1F7CB127002F8643 /* RetweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetViewController.swift; sourceTree = "<group>"; };
 		A013B7958590E38E24B4EA28 /* Pods-Twitter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,7 @@
 				494483AB1F7AB61D009A099C /* LoginViewController.swift */,
 				4992A7F41F7C0AB4002F8643 /* PostViewController.swift */,
 				4992A7F61F7C53B3002F8643 /* ReplyViewController.swift */,
+				4992A81A1F7CB127002F8643 /* RetweetViewController.swift */,
 				4992A7F31F7BFC43002F8643 /* HomeViewController */,
 			);
 			name = Controllers;
@@ -284,6 +287,7 @@
 				4924167C1F7ADDDC00AB0E97 /* User.swift in Sources */,
 				494483AA1F7AB61D009A099C /* AppDelegate.swift in Sources */,
 				492416801F7AFDF300AB0E97 /* HomeViewController.swift in Sources */,
+				4992A81B1F7CB127002F8643 /* RetweetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
