@@ -20,7 +20,15 @@ internal class HomeViewController: UIViewController {
     
     fileprivate var refreshControl: UIRefreshControl!
     
-    internal var tweets = [Tweet]()
+    internal var tweets = [Tweet]() {
+        didSet {
+            for (index, tweet) in tweets.enumerated() {
+                favoritedTweets[index] = tweet.isFavorited
+            }
+        }
+    }
+    
+    fileprivate var favoritedTweets = [Int : Bool]()
     
     // MARK: Lifecycles
     
@@ -102,7 +110,8 @@ extension HomeViewController: HomeCellDelegate {
     }
     
     func homeCell(_ cell: HomeCell, didTapFavorite with: Tweet, isFavorite: Bool) {
-        
+        let indexPath = tableView.indexPath(for: cell)!
+        favoritedTweets[indexPath.row] = isFavorite
     }
     
 }
@@ -120,6 +129,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let tweet = tweets[indexPath.row]
         cell.tweet = tweet
         cell.delegate = self
+        cell.isFavorited = favoritedTweets[indexPath.row] ?? false
         return cell
     }
     

@@ -55,6 +55,12 @@ internal class HomeCell: UITableViewCell {
         }
     }
     
+    internal var isFavorited: Bool = false {
+        didSet {
+            favoratedButon.isSelected = isFavorited
+        }
+    }
+    
     // MARK: Delegate Property
     
     internal var delegate: HomeCellDelegate?
@@ -72,6 +78,12 @@ internal class HomeCell: UITableViewCell {
         timeStampLabel.text = "39h" // FIXME: - needs to be formatted
         mediaImageView.image = nil
         topConstraint.constant = 8
+        setupButtons()
+    }
+    
+    private func setupButtons() {
+        favoratedButon.setImage(#imageLiteral(resourceName: "HeartFilled"), for: .selected)
+        favoratedButon.setImage(#imageLiteral(resourceName: "HeartUnfilled"), for: .normal)
     }
     
     private func setupCellForRetweetedTweet() {
@@ -101,7 +113,8 @@ internal class HomeCell: UITableViewCell {
     }
     
     @IBAction func onFavoritesTap(_ sender: UIButton) {
-        delegate?.homeCell?(self, didTapFavorite: tweet, isFavorite: true)
+        isFavorited = !isFavorited
+        delegate?.homeCell?(self, didTapFavorite: tweet, isFavorite: isFavorited)
     }
     
     
