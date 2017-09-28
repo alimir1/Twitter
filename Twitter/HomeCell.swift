@@ -10,7 +10,7 @@ import UIKit
 
 @objc protocol HomeCellDelegate: class {
     @objc optional func homeCell(_ cell: HomeCell, didTapReply with: Tweet)
-    @objc optional func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet)
+    @objc optional func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet, shouldRetweet: Bool)
     @objc optional func homeCell(_ cell: HomeCell, didTapFavorite with: Tweet, isFavorite: Bool)
 }
 
@@ -120,7 +120,7 @@ internal class HomeCell: UITableViewCell {
     }
     
     @IBAction private func onRetweetTap(_ sender: UIButton) {
-        delegate?.homeCell?(self, didTapRetwet: tweet)
+        delegate?.homeCell?(self, didTapRetwet: tweet, shouldRetweet: !isRetweeted)
     }
     
     @IBAction func onFavoritesTap(_ sender: UIButton) {

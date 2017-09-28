@@ -104,9 +104,24 @@ extension HomeViewController: HomeCellDelegate {
         present(replyVC, animated: true, completion: nil)
     }
     
-    func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet) {
-        let retweetVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "retweetVC") as! RetweetViewController
+    func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet, shouldRetweet: Bool) {
         let indexPath = tableView.indexPath(for: cell)!
+        
+        guard shouldRetweet else {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            TwitterClient.shared.retweet(id: with.id!, shouldUntweet: true) {
+                success, error in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                if success {
+                    self.handleUpdatedRetwet(indexPath: indexPath, isRetweeted: false, cell: cell)
+                } else {
+                    print(error!.localizedDescription)
+                }
+            }
+            return
+        }
+        
+        let retweetVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "retweetVC") as! RetweetViewController
         retweetVC.tweet = with
         retweetVC.retweetAction = {
             isRetweeted in
@@ -133,7 +148,6 @@ extension HomeViewController: HomeCellDelegate {
     // MARK: Handlers
     
     func handleUpdatedRetwet(indexPath: IndexPath, isRetweeted: Bool, cell: HomeCell) {
-        guard isRetweeted else { return }
         self.retweetedTweets[indexPath.row] = isRetweeted
         self.tweets[indexPath.row].isRetweeted = isRetweeted
         cell.isRetweeted = isRetweeted

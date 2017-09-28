@@ -75,7 +75,7 @@ internal class RetweetViewController: UIViewController {
     @IBAction private func onRetweet(_ sender: UIButton) {
         retweetButton.isEnabled = false
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        TwitterClient.shared.retweet(id: tweet.id!) {
+        TwitterClient.shared.retweet(id: tweet.id!, shouldUntweet: false) {
             success, error in
             MBProgressHUD.hide(for: self.view, animated: true)
             self.retweetButton.isEnabled = true

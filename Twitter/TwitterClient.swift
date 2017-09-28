@@ -183,9 +183,10 @@ extension TwitterClient {
         }
     }
     
-    internal func retweet(id: Int64, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    internal func retweet(id: Int64, shouldUntweet: Bool, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
         let parameters = ["id" : id]
-        postRequest(RequestURL.retweet(id), with: parameters) {
+        let requestURLString = shouldUntweet ? RequestURL.untweet(id) : RequestURL.retweet(id)
+        postRequest(requestURLString, with: parameters) {
             response, error in
             if response != nil {
                 completion(true, error)
@@ -241,6 +242,9 @@ extension TwitterClient {
         static let destroyFavorites = "1.1/favorites/destroy.json"
         static func retweet(_ id: Int64) -> String {
             return "1.1/statuses/retweet/\(id).json"
+        }
+        static func untweet(_ id: Int64) -> String {
+            return "1.1/statuses/unretweet/\(id).json"
         }
         static func authentication(token: String) -> String {
             return "https://api.twitter.com/oauth/authenticate?oauth_token=\(token)"
