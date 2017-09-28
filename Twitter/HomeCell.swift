@@ -29,6 +29,7 @@ internal class HomeCell: UITableViewCell {
     @IBOutlet private var favoratedButon: UIButton!
     @IBOutlet private var replyButon: UIButton!
     @IBOutlet private var retweetButon: UIButton!
+    @IBOutlet private var optionsStackViewVerticalConstraint: NSLayoutConstraint!
     @IBOutlet private var topConstraint: NSLayoutConstraint!
     
     // MARK: Property Observers
@@ -67,10 +68,12 @@ internal class HomeCell: UITableViewCell {
         timeStampLabel.text = tweet.createdAt!.timeAgo
         mediaImageView.image = nil
         topConstraint.constant = 8
+        optionsStackViewVerticalConstraint.constant = 8
         setupButtons()
         
         if let mediaURL = tweet.mediaURL {
             mediaImageView.setImageWith(mediaURL)
+            optionsStackViewVerticalConstraint.constant = 168
         }
         guard !tweet.isRetweetedTweet else {
             setupCellForRetweetedTweet()

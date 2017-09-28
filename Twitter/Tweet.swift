@@ -10,6 +10,8 @@ import Foundation
 
 internal class Tweet: NSObject {
     
+    internal typealias ImageDimension = (width: Int, height: Int)
+    
     // MARK: Stored Properties
     
     private(set) var user: User?
@@ -22,6 +24,7 @@ internal class Tweet: NSObject {
     private(set) var inReplyToScreenName: String?
     private(set) var retweetSourceUser: User?
     private(set) var id: Int64?
+    private(set) var mediaImageSize: (large: ImageDimension?, medium: ImageDimension?, small: ImageDimension?)?
     
     internal var isFavorited: Bool = false
     internal var isRetweeted: Bool = false
@@ -40,7 +43,26 @@ internal class Tweet: NSObject {
         }
         
         if let entities = dictionary["entities"] as? NSDictionary, let media = entities["media"] as? [NSDictionary] {
-            if let mediaURL = media[0]["media_url_https"] as? String {
+            if let mediaURL = media[0]["media_url_https"] as? String, let mediaType = media[0]["type"] as? String, mediaType == "photo" {
+                if let sizes = media[0]["sizes"] as? NSDictionary {
+                    if let largeSize = sizes["large"] as? NSDictionary {
+                        let height = largeSize["h"] as? NSNumber
+                        let width = largeSize["w"] as? NSNumber
+                        mediaImageSize?.large? = (width: Int(width ?? 0), height: Int(height ?? 0))
+                    }
+                    
+                    if let mediumSize = sizes["medium"] as? NSDictionary {
+                        let height = mediumSize["h"] as? NSNumber
+                        let width = mediumSize["w"] as? NSNumber
+                        mediaImageSize?.medium? = (width: Int(width ?? 0), height: Int(height ?? 0))
+                    }
+                    
+                    if let smallSize = sizes["small"] as? NSDictionary {
+                        let height = smallSize["h"] as? NSNumber
+                        let width = smallSize["w"] as? NSNumber
+                        mediaImageSize?.small? = (width: Int(width ?? 0), height: Int(height ?? 0))
+                    }
+                }
                 self.mediaURL = URL(string: mediaURL)
             }
         }
