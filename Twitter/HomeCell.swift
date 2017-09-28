@@ -64,7 +64,7 @@ internal class HomeCell: UITableViewCell {
     
     private func setupCell() {
         tweetTextLabel.text = tweet.text
-        timeStampLabel.text = "39h" // FIXME: - needs to be formatted
+        timeStampLabel.text = tweet.createdAt!.timeAgo
         mediaImageView.image = nil
         topConstraint.constant = 8
         setupButtons()

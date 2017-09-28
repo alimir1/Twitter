@@ -145,7 +145,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="283" placeholderIntrinsicHeight="41" translatesAutoresizingMaskIntoConstraints="NO" id="o5C-Xy-MKc">
                                                     <rect key="frame" x="84" y="80" width="283" height="41"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="U0p-aU-DIJ"/>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="250" id="U0p-aU-DIJ"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
