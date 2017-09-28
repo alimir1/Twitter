@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icons8-Reply Arrow Filled-20.png",
+      "filename" : "icons8-Retweet Filled-25.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icons8-Retweet Filled-50.png",
       "scale" : "2x"
     },
     {
