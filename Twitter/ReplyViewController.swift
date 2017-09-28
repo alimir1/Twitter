@@ -21,6 +21,7 @@ internal class ReplyViewController: UIViewController {
     // MARK: Stored Properties
     
     internal var replyingToTweet: Tweet!
+    internal var replyAction: ((Tweet?) -> Void)?
     
     // MARK: Computed Properties
     
@@ -77,9 +78,10 @@ internal class ReplyViewController: UIViewController {
         MBProgressHUD.showAdded(to: view, animated: true)
         
         TwitterClient.shared.post(tweet: tweetStatus, idForReply: replyingToTweet.id!) {
-            success, error in
+            tweet, success, error in
             MBProgressHUD.hide(for: self.view, animated: true)
             if success {
+                self.replyAction?(tweet)
                 self.dismissVC()
             } else {
                 print("\(error!.localizedDescription)") // MARK: Show something

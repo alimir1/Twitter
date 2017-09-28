@@ -21,6 +21,7 @@ internal class PostViewController: UIViewController {
     // MARK: Stored Properties
     
     private var originalBottomConstraintConstant: CGFloat!
+    internal var tweetAction: ((Tweet?) -> Void)?
     
     // MARK: Lifecycles
     
@@ -83,12 +84,13 @@ internal class PostViewController: UIViewController {
         guard !tweetTextView.text.isEmpty else { return } // FIXME: display more meaningful message to user!
         MBProgressHUD.showAdded(to: view, animated: true)
         TwitterClient.shared.post(tweet: tweetTextView.text, idForReply: nil) {
-            didSuccessfullyPost, potentialError in
+            tweet, didSuccessfullyPost, error in
             if didSuccessfullyPost {
+                self.tweetAction?(tweet)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 // FIXME: Show nice error somewhere...
-                print(potentialError!.localizedDescription)
+                print(error!.localizedDescription)
             }
             MBProgressHUD.hide(for: self.view, animated: true)
         }

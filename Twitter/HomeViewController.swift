@@ -47,7 +47,6 @@ internal class HomeViewController: UIViewController {
     
 }
 
-
 // MARK: - Setup Views
 
 extension HomeViewController {
@@ -95,12 +94,64 @@ extension HomeViewController {
     }
 }
 
+// MARKL: - Navigation
+
+extension HomeViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "postTweetVC" {
+            let postVC = segue.destination as! PostViewController
+            postVC.tweetAction = {
+                tweet in
+                if let tweet = tweet {
+                    self.addTweetToTableView(tweet: tweet)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Helpers
+
+extension HomeViewController {
+    func addTweetToTableView(tweet: Tweet) {
+        self.tweets.insert(tweet, at: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .automatic)
+    }
+    
+    func handleUpdatedRetwet(indexPath: IndexPath, isRetweeted: Bool, cell: HomeCell) {
+        self.retweetedTweets[indexPath.row] = isRetweeted
+        self.tweets[indexPath.row].isRetweeted = isRetweeted
+        cell.isRetweeted = isRetweeted
+        let retweetedCount = self.tweets[indexPath.row].retweetCount
+        let resetRetweetCount = isRetweeted ? retweetedCount + 1 : retweetedCount - 1
+        self.tweets[indexPath.row].setRetweetsCount(resetRetweetCount)
+        cell.tweet = self.tweets[indexPath.row]
+    }
+    
+    func handleUpdatedFavorite(indexPath: IndexPath, isFavorite: Bool, cell: HomeCell) {
+        self.favoriteTweets[indexPath.row] = isFavorite
+        self.tweets[indexPath.row].isFavorited = isFavorite
+        cell.isFavorited = isFavorite
+        let favoritesCount = self.tweets[indexPath.row].favoritesCount
+        let resetFavoritesCount = isFavorite ? favoritesCount + 1 : favoritesCount - 1
+        self.tweets[indexPath.row].setFavCount(resetFavoritesCount)
+        cell.tweet = self.tweets[indexPath.row]
+    }
+}
+
 // MARK: - HomeCellDelegate
 
 extension HomeViewController: HomeCellDelegate {
     func homeCell(_ cell: HomeCell, didTapReply with: Tweet) {
         let replyVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "replyVC") as! ReplyViewController
         replyVC.replyingToTweet = with
+        replyVC.replyAction = {
+            tweet in
+            if let tweet = tweet {
+                self.addTweetToTableView(tweet: tweet)
+            }
+        }
         present(replyVC, animated: true, completion: nil)
     }
     
@@ -143,28 +194,6 @@ extension HomeViewController: HomeCellDelegate {
                 print(error!.localizedDescription)
             }
         }
-    }
-    
-    // MARK: Handlers
-    
-    func handleUpdatedRetwet(indexPath: IndexPath, isRetweeted: Bool, cell: HomeCell) {
-        self.retweetedTweets[indexPath.row] = isRetweeted
-        self.tweets[indexPath.row].isRetweeted = isRetweeted
-        cell.isRetweeted = isRetweeted
-        let retweetedCount = self.tweets[indexPath.row].retweetCount
-        let resetRetweetCount = isRetweeted ? retweetedCount + 1 : retweetedCount - 1
-        self.tweets[indexPath.row].setRetweetsCount(resetRetweetCount)
-        cell.tweet = self.tweets[indexPath.row]
-    }
-    
-    func handleUpdatedFavorite(indexPath: IndexPath, isFavorite: Bool, cell: HomeCell) {
-        self.favoriteTweets[indexPath.row] = isFavorite
-        self.tweets[indexPath.row].isFavorited = isFavorite
-        cell.isFavorited = isFavorite
-        let favoritesCount = self.tweets[indexPath.row].favoritesCount
-        let resetFavoritesCount = isFavorite ? favoritesCount + 1 : favoritesCount - 1
-        self.tweets[indexPath.row].setFavCount(resetFavoritesCount)
-        cell.tweet = self.tweets[indexPath.row]
     }
 }
 

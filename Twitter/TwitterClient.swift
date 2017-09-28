@@ -163,7 +163,7 @@ extension TwitterClient {
         }
     }
     
-    internal func post(tweet status: String, idForReply id: Int64?, completion: @escaping (_ success: Bool, _ error: Error?) -> Void) {
+    internal func post(tweet status: String, idForReply id: Int64?, completion: @escaping (_ tweet: Tweet?, _ success: Bool, _ error: Error?) -> Void) {
         
         var parameters = [String : Any]()
         
@@ -176,9 +176,13 @@ extension TwitterClient {
         postRequest(RequestURL.update, with: parameters) {
             response, error in
             if response != nil {
-                completion(true, error)
+                if let responseTweetDict = response as? NSDictionary {
+                    completion(Tweet(dictionary: responseTweetDict), true, nil)
+                } else {
+                    completion(nil, true, error)
+                }
             } else {
-                completion(false, error)
+                completion(nil, false, error)
             }
         }
     }

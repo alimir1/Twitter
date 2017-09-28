@@ -217,7 +217,7 @@
                         <barButtonItem key="rightBarButtonItem" image="Compose" id="int-Ql-Bn3">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="Wg1-xN-qmG" kind="presentation" animates="NO" id="uuJ-BP-liJ"/>
+                                <segue destination="Wg1-xN-qmG" kind="presentation" identifier="postTweetVC" animates="NO" id="uuJ-BP-liJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
