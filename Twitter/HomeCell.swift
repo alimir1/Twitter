@@ -18,7 +18,7 @@ internal class HomeCell: UITableViewCell {
     
     // MARK: Outlets
 
-    @IBOutlet internal var mediaImageView: UIImageView!
+    @IBOutlet private var mediaImageView: UIImageView!
     @IBOutlet private var profileImageView: UIImageView!
     @IBOutlet private var usernameSmallLabel: UILabel!
     @IBOutlet private var usernameLabel: UILabel!
