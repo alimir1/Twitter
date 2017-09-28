@@ -47,9 +47,9 @@ internal class HomeCell: UITableViewCell {
             setupCellForNonRetweetedTweet()
             
             if let inReplyTo = tweet.inReplyToScreenName {
-                self.retweeterNameLabel.text = "Replying to @\(inReplyTo)"
+                retweeterNameLabel.text = "Replying to @\(inReplyTo)"
                 retweetStackView.isHidden = false
-                self.topConstraint.constant = 24
+                topConstraint.constant = 24
             }
             
         }
@@ -68,26 +68,26 @@ internal class HomeCell: UITableViewCell {
     }
     
     private func setupCell() {
-        self.tweetTextLabel.text = tweet.text
-        self.timeStampLabel.text = "39h" // FIXME: - needs to be formatted
-        self.mediaImageView.image = nil
-        self.topConstraint.constant = 8
+        tweetTextLabel.text = tweet.text
+        timeStampLabel.text = "39h" // FIXME: - needs to be formatted
+        mediaImageView.image = nil
+        topConstraint.constant = 8
     }
     
     private func setupCellForRetweetedTweet() {
-        self.profileImageView.setImageWith(tweet.retweetSourceUser!.profileURL!)
-        self.usernameSmallLabel.text = "@\(tweet.retweetSourceUser!.screenName!)"
-        self.usernameLabel.text = tweet.retweetSourceUser?.name
-        self.retweeterNameLabel.text = "\(tweet.user!.name!) retweeted"
+        profileImageView.setImageWith(tweet.retweetSourceUser!.profileURL!)
+        usernameSmallLabel.text = "@\(tweet.retweetSourceUser!.screenName!)"
+        usernameLabel.text = tweet.retweetSourceUser?.name
+        retweeterNameLabel.text = "\(tweet.user!.name!) retweeted"
         retweetStackView.isHidden = false
-        self.topConstraint.constant = 24
+        topConstraint.constant = 24
     }
     
     private func setupCellForNonRetweetedTweet() {
         retweetStackView.isHidden = true
-        self.profileImageView.setImageWith(tweet.user!.profileURL!)
-        self.usernameSmallLabel.text = "@\(tweet.user!.screenName!)"
-        self.usernameLabel.text = tweet.user?.name
+        profileImageView.setImageWith(tweet.user!.profileURL!)
+        usernameSmallLabel.text = "@\(tweet.user!.screenName!)"
+        usernameLabel.text = tweet.user?.name
     }
     
     // MARK: Target-action
