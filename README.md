@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 - [x] Displays media photos in home view controller for tweets that have media images
 - [x] Modal presentation for post, reply, and retweet with nice background blur
 - [x] Displays statuses such as "Replying to" and "Retweet" on top of appropriate cells
-- [x] 'Retweet' and 'like' statuses are updated instantly in HomeVC whenever user makes changes in HomeDetailVC
+- [x] 'Retweet' and 'like' statuses are updated instantly in HomeVC whenever user makes changes in HomeDetailVC (without reloading the tableView or fetching it from API)
 - [x] Shows activity indicator view
 - [x] Designed login screen
 
