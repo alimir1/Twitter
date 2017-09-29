@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-internal class PostViewController: UIViewController {
+internal class PostViewController: UIViewController, UITextViewDelegate {
     
     // MARK: Outlets
     
@@ -17,11 +17,26 @@ internal class PostViewController: UIViewController {
     @IBOutlet private var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private var tweetTextView: UITextView!
     @IBOutlet private var usernameLabel: UILabel!
+    @IBOutlet private var remainingTextCountLabel: UILabel!
     
     // MARK: Stored Properties
     
+    private var allowedTextCount = 140
     private var originalBottomConstraintConstant: CGFloat!
     internal var tweetAction: ((Tweet?) -> Void)?
+    
+    // MAKR: Other Properties
+    
+    private var remainingTextCount: Int = 0 {
+        didSet {
+            remainingTextCountLabel.text = "\(remainingTextCount)"
+            remainingTextCountLabel.textColor = remainingTextCount > 0 ? .darkGray : .red
+        }
+    }
+    
+    private var isValidTweet: Bool {
+        return remainingTextCount > 0 && !tweetTextView.text.isEmpty
+    }
     
     // MARK: Lifecycles
     
@@ -30,7 +45,9 @@ internal class PostViewController: UIViewController {
         tweetTextView.becomeFirstResponder()
         originalBottomConstraintConstant = bottomConstraint.constant
         setupViews()
+        tweetTextView.delegate = self
         addKeyboardObservers()
+        remainingTextCount = allowedTextCount
     }
     
     // MARK: Views Setup
@@ -81,7 +98,7 @@ internal class PostViewController: UIViewController {
     }
     
     @IBAction private func onPostTweet(sender: UIButton?) {
-        guard !tweetTextView.text.isEmpty else { return } // FIXME: display more meaningful message to user!
+        guard isValidTweet else { return } // FIXME: display more meaningful message to user!
         MBProgressHUD.showAdded(to: view, animated: true)
         TwitterClient.shared.post(tweet: tweetTextView.text, idForReply: nil) {
             tweet, didSuccessfullyPost, error in
@@ -95,5 +112,10 @@ internal class PostViewController: UIViewController {
             MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
-
+    
+    // MARK: TextView delegate
+    
+    func textViewDidChange(_ textView: UITextView) {
+        remainingTextCount = allowedTextCount - textView.text.characters.count
+    }
 }

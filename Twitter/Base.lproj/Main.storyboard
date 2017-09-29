@@ -270,7 +270,13 @@
                                         <rect key="frame" x="0.0" y="169.5" width="327" height="30.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@someUser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnW-Iz-tsc">
-                                                <rect key="frame" x="8" y="8" width="311" height="14.5"/>
+                                                <rect key="frame" x="8" y="8" width="72" height="14.5"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7O-vF-bc0">
+                                                <rect key="frame" x="310.5" y="8" width="8.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -278,10 +284,12 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.10130823393953706" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="J7O-vF-bc0" firstAttribute="top" secondItem="f9L-Jh-iRE" secondAttribute="top" constant="8" id="1xw-W5-I2f"/>
                                             <constraint firstItem="rnW-Iz-tsc" firstAttribute="leading" secondItem="f9L-Jh-iRE" secondAttribute="leading" constant="8" id="3Jt-ml-vxs"/>
                                             <constraint firstItem="rnW-Iz-tsc" firstAttribute="top" secondItem="f9L-Jh-iRE" secondAttribute="top" constant="8" id="7v6-lR-Mhg"/>
                                             <constraint firstAttribute="bottom" secondItem="rnW-Iz-tsc" secondAttribute="bottom" constant="8" id="GhG-OO-m8s"/>
-                                            <constraint firstAttribute="trailing" secondItem="rnW-Iz-tsc" secondAttribute="trailing" constant="8" id="cDV-Hv-Vyo"/>
+                                            <constraint firstAttribute="bottom" secondItem="J7O-vF-bc0" secondAttribute="bottom" constant="8" id="VHa-o4-4DN"/>
+                                            <constraint firstAttribute="trailing" secondItem="J7O-vF-bc0" secondAttribute="trailing" constant="8" id="j4v-gm-S41"/>
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMH-Qe-EiY">
@@ -358,6 +366,7 @@
                     <connections>
                         <outlet property="bottomConstraint" destination="bJz-ZC-8Kh" id="iV7-L1-QJC"/>
                         <outlet property="popupView" destination="T4I-pR-3xv" id="nIR-EG-NO6"/>
+                        <outlet property="remainingTextCountLabel" destination="J7O-vF-bc0" id="n6F-0a-PVR"/>
                         <outlet property="tweetTextView" destination="MMH-Qe-EiY" id="SLT-0f-DSh"/>
                         <outlet property="usernameLabel" destination="rnW-Iz-tsc" id="7Mp-V5-LHK"/>
                     </connections>
