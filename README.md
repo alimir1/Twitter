@@ -27,7 +27,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Supports multiple endpoints for timeline: Home, Mentions, & User
+- [x] Supports multiple endpoints for timeline: Home, Mentions, & User.
 - [x] Displays media photos for tweets that have media images.
 - [x] Modal presentation for post, reply, and retweet with nice background blur.
 - [x] 'Retweet' and 'like' statuses are updated instantly in HomeVC whenever user makes changes in HomeDetailVC (without reloading the tableView or fetching it from API).
