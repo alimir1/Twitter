@@ -22,21 +22,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fdd-hv-h2R">
-                                <rect key="frame" x="168" y="549" width="38" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Yox-Xg-bo9">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hey." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQX-U3-BnB">
+                                <rect key="frame" x="24" y="70" width="327" height="60"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Twitter." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="jrW-Qp-S8K">
+                                <rect key="frame" x="24" y="138" width="327" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fdd-hv-h2R">
+                                <rect key="frame" x="97" y="587" width="180" height="50"/>
+                                <color key="backgroundColor" red="0.20479296762627885" green="0.62405505963424257" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4fR-ID-pwl"/>
+                                    <constraint firstAttribute="width" constant="180" id="iEM-Og-NgP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="onLoginTapWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DyZ-Kl-5rd"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jrW-Qp-S8K" firstAttribute="leading" secondItem="TQX-U3-BnB" secondAttribute="leading" id="3th-k9-63x"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Fdd-hv-h2R" secondAttribute="bottom" constant="30" id="GDG-3h-jcu"/>
+                            <constraint firstItem="Yox-Xg-bo9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SSw-u4-JD5"/>
+                            <constraint firstItem="TQX-U3-BnB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="YOL-e5-qW0"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Yox-Xg-bo9" secondAttribute="bottom" id="a9C-0P-NJm"/>
+                            <constraint firstAttribute="trailing" secondItem="Yox-Xg-bo9" secondAttribute="trailing" id="dDE-Dk-2aa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TQX-U3-BnB" secondAttribute="trailing" constant="8" id="dsZ-q1-wcw"/>
+                            <constraint firstItem="jrW-Qp-S8K" firstAttribute="top" secondItem="TQX-U3-BnB" secondAttribute="bottom" constant="8" id="fGo-gU-jLe"/>
+                            <constraint firstItem="Yox-Xg-bo9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="omP-pl-P8O"/>
+                            <constraint firstItem="TQX-U3-BnB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="rK1-xW-AOV"/>
+                            <constraint firstItem="Fdd-hv-h2R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sh8-PD-g1a"/>
+                            <constraint firstItem="jrW-Qp-S8K" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vn8-aE-UH5"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="Fdd-hv-h2R" id="01U-tu-Qf9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="130"/>
+            <point key="canvasLocation" x="29.600000000000001" y="129.98500749625188"/>
         </scene>
         <!--Home-->
         <scene sceneID="y47-xz-5vb">
@@ -873,6 +912,7 @@
         <image name="CommentUnfilled" width="25" height="25"/>
         <image name="Compose" width="25" height="25"/>
         <image name="HeartUnfilled" width="25" height="25"/>
+        <image name="LoginBackground" width="1920" height="1080"/>
         <image name="RetweetUnfilled" width="32" height="32"/>
         <image name="Sign Out" width="25" height="25"/>
         <image name="TwitterIcon" width="25" height="25"/>

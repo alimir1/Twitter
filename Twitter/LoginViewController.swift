@@ -10,11 +10,17 @@ import UIKit
 import MBProgressHUD
 
 internal class LoginViewController: UIViewController {
+    
+    // MARK: Outlets
+    
+    @IBOutlet private var loginButton: UIButton!
 
     // MARK: Lifecycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginButton.layer.cornerRadius = 10
+        loginButton.layer.masksToBounds = true
     }
     
     // MARK: Target-Actions
