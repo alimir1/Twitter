@@ -21,6 +21,7 @@ internal class TweetsViewController: UIViewController {
     fileprivate var favoriteTweets = [Int : Bool]()
     fileprivate var retweetedTweets = [Int : Bool]()
     fileprivate var isFetchingMoreData = false
+    internal var endpoint: TweetSource!
     
     // MARK: Property Observers
     
@@ -32,8 +33,6 @@ internal class TweetsViewController: UIViewController {
             }
         }
     }
-    
-    
     
     // MARK: Lifecycles
     
@@ -86,7 +85,7 @@ extension TweetsViewController {
     fileprivate func fetchData(shouldGetNextPage: Bool) {
         MBProgressHUD.showAdded(to: view, animated: true)
         isFetchingMoreData = shouldGetNextPage
-        TwitterClient.shared.tweets(from: .homeTimeline, shouldGetNextPage: shouldGetNextPage) {
+        TwitterClient.shared.tweets(from: endpoint, shouldGetNextPage: shouldGetNextPage) {
             tweets, error in
             if let tweets = tweets {
                 if shouldGetNextPage {

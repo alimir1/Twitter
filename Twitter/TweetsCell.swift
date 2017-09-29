@@ -94,8 +94,8 @@ internal class TweetsCell: UITableViewCell {
         favoratedButon.setImage(#imageLiteral(resourceName: "HeartUnfilled"), for: .normal)
         retweetButon.setImage(#imageLiteral(resourceName: "RetweetFilled"), for: .selected)
         retweetButon.setImage(#imageLiteral(resourceName: "RetweetUnfilled"), for: .normal)
-        let retweeetTitleText = tweet.retweetCount > 0 ? "   \(tweet.retweetCount)" : nil
-        let favoriteTitleText = tweet.favoritesCount > 0 ? "   \(tweet.favoritesCount)" : nil
+        let retweeetTitleText = tweet.retweetCount > 0 ? " \(tweet.retweetCount)" : nil
+        let favoriteTitleText = tweet.favoritesCount > 0 ? " \(tweet.favoritesCount)" : nil
         retweetButon.setTitle(retweeetTitleText, for: .normal)
         favoratedButon.setTitle(favoriteTitleText, for: .normal)
     }

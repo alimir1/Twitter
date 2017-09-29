@@ -77,7 +77,7 @@
             </objects>
             <point key="canvasLocation" x="29.600000000000001" y="129.98500749625188"/>
         </scene>
-        <!--Home-->
+        <!--Tweets View Controller-->
         <scene sceneID="y47-xz-5vb">
             <objects>
                 <viewController id="sJM-c0-eVZ" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
@@ -156,11 +156,12 @@
                                                         <constraint firstAttribute="height" constant="150" id="l6I-Ik-nXV"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="GKz-J6-fEy" userLabel="Options Stack View">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="GKz-J6-fEy" userLabel="Options Stack View">
                                                     <rect key="frame" x="84" y="240.5" width="182" height="32"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Hx-ha0" userLabel="Reply Button">
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Hx-ha0" userLabel="Reply Button">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="32"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" image="CommentUnfilled">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
@@ -168,8 +169,9 @@
                                                                 <action selector="onReplyTapWithSender:" destination="HTY-bJ-H97" eventType="touchUpInside" id="bch-QC-T4H"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbi-Hj-wrm" userLabel="Retweet Button">
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbi-Hj-wrm" userLabel="Retweet Button">
                                                             <rect key="frame" x="75" y="0.0" width="32" height="32"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" image="RetweetUnfilled">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
@@ -177,8 +179,9 @@
                                                                 <action selector="onRetweetTap:" destination="HTY-bJ-H97" eventType="touchUpInside" id="qdl-gI-jmd"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WII-GX-c3T" userLabel="Favorite Button">
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WII-GX-c3T" userLabel="Favorite Button">
                                                             <rect key="frame" x="157" y="0.0" width="25" height="32"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" image="HeartUnfilled">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
@@ -247,7 +250,7 @@
                             <constraint firstItem="bba-wK-vFu" firstAttribute="top" secondItem="G3o-bb-6xK" secondAttribute="bottom" id="fmO-28-A0L"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="zaS-w7-ktr">
+                    <navigationItem key="navigationItem" id="zaS-w7-ktr">
                         <barButtonItem key="leftBarButtonItem" image="Sign Out" id="p1C-xT-KLu">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -779,6 +782,20 @@
             </objects>
             <point key="canvasLocation" x="1976.8" y="-547.37631184407803"/>
         </scene>
+        <!--Tweets Tab BarVC-->
+        <scene sceneID="FAB-w1-KwQ">
+            <objects>
+                <tabBarController storyboardIdentifier="tweetsTabBarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pAo-aN-LD6" customClass="TweetsTabBarVC" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="E43-ik-LDh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k7B-38-Dyv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="30" y="880"/>
+        </scene>
         <!--Reply View Controller-->
         <scene sceneID="Rpx-7o-nfB">
             <objects>
@@ -888,7 +905,7 @@
             <objects>
                 <navigationController storyboardIdentifier="tweetsNavCtrl" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YmW-AM-bjB" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="nIu-Wq-uYM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="nIu-Wq-uYM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -11,6 +11,8 @@ import BDBOAuth1Manager
 
 internal enum TweetSource {
     case homeTimeline
+    case mentionsTimeline
+    case userTimeLine
 }
 
 internal class TwitterClient: BDBOAuth1SessionManager {
@@ -149,7 +151,11 @@ extension TwitterClient {
         
         switch source {
         case .homeTimeline:
-            requestURLString = RequestURL.timeline
+            requestURLString = RequestURL.homeTimeline
+        case .mentionsTimeline:
+            requestURLString = RequestURL.mentionsTimeline
+        case .userTimeLine:
+            requestURLString = RequestURL.userTimeline
         }
         
         var parameters: [String : Any] = ["include_entities" : true]
@@ -253,7 +259,9 @@ extension TwitterClient {
     fileprivate struct RequestURL {
         static let accessToken = "oauth/access_token"
         static let requestToken = "oauth/request_token"
-        static let timeline = "1.1/statuses/home_timeline.json"
+        static let homeTimeline = "1.1/statuses/home_timeline.json"
+        static let mentionsTimeline = "1.1/statuses/mentions_timeline.json"
+        static let userTimeline = "1.1/statuses/user_timeline.json"
         static let update = "1.1/statuses/update.json"
         static let accountVerifyCredentials = "1.1/account/verify_credentials.json"
         static let createFavorites = "1.1/favorites/create.json"

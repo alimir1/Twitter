@@ -68,7 +68,11 @@ internal class TweetDetailTableVC: UITableViewController {
     }
     
     private func setupDateTimeLabel() {
-        dateTimeLabel.text = "\(tweet.createdAt!)"
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.setLocalizedDateFormatFromTemplate("MM/dd/yyyyh:mma")
+        dateTimeLabel.text = formatter.string(from: tweet.createdAt!)
+        
     }
     
     private func setupCountLabels() {
@@ -191,7 +195,7 @@ internal class TweetDetailTableVC: UITableViewController {
     @IBAction private func onCommentTap(_ sender: Any) {
         let replyVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "replyVC") as! ReplyViewController
         replyVC.replyingToTweet = tweet
-        present(replyVC, animated: false, completion: nil)
+        present(replyVC, animated: true, completion: nil)
     }
     
     // MARK: TableView Methods

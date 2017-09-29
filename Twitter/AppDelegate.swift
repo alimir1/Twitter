@@ -15,9 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         setupLoginVCWithObservers()
-        
+        UITabBar.appearance().tintColor = UIColor(red:0.38, green:0.65, blue:1.00, alpha:1.0)
         return true
     }
     
@@ -52,8 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupLoginVCWithObservers() {
         if User.isUserLoggedIn {
-            let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsNavCtrl")
-            window?.rootViewController = tweetsNavVC
+            let toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsTabBarVC")
+            window?.rootViewController = toVC
         }
         
         NotificationCenter.default.addObserver(forName: .UserDidLogout, object: nil, queue: OperationQueue.main) {

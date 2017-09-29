@@ -42,9 +42,8 @@ internal class LoginViewController: UIViewController {
     // MARK: Helpers
         
     private func handleSuccessfulLogin() {
-        let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsNavCtrl") as! UINavigationController
+        let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsTabBarVC")
         self.present(tweetsNavVC, animated: true, completion: nil)
     }
-    
 }
 
