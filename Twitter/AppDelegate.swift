@@ -16,16 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        if User.isUserLoggedIn {
-            let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsNavCtrl")
-            window?.rootViewController = tweetsNavVC
-        }
-        
-        NotificationCenter.default.addObserver(forName: .UserDidLogout, object: nil, queue: OperationQueue.main) {
-            notification in
-            let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-            self.window?.rootViewController = loginVC
-        }
+        setupLoginVCWithObservers()
         
         return true
     }
@@ -55,6 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         TwitterClient.shared.handle(open: url)
         return true
+    }
+    
+    // MARK: Helpers
+    
+    func setupLoginVCWithObservers() {
+        if User.isUserLoggedIn {
+            let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsNavCtrl")
+            window?.rootViewController = tweetsNavVC
+        }
+        
+        NotificationCenter.default.addObserver(forName: .UserDidLogout, object: nil, queue: OperationQueue.main) {
+            notification in
+            let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+            self.window?.rootViewController = loginVC
+        }
     }
     
 }
