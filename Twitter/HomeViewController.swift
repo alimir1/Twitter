@@ -109,7 +109,7 @@ extension HomeViewController {
         }
         
         if segue.identifier == "tweetDetailVC" {
-            let tweetDetailVC = segue.destination as! TweetDetailVC
+            let tweetDetailVC = segue.destination as! TweetDetailTableVC
             let indexPath = tableView.indexPathForSelectedRow!
             tweetDetailVC.tweet = tweets[indexPath.row]
         }

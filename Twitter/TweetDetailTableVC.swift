@@ -1,5 +1,5 @@
 //
-//  TweetDetailVC.swift
+//  TweetDetailTableVC.swift
 //  Twitter
 //
 //  Created by Ali Mir on 9/28/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal class TweetDetailVC: UIViewController {
+internal class TweetDetailTableVC: UITableViewController {
     
     // MARK: Outlets
     
@@ -26,17 +26,19 @@ internal class TweetDetailVC: UIViewController {
     @IBOutlet private var likeButton: UIButton!
     @IBOutlet private var statusStackView: UIStackView!
     @IBOutlet private var profileImageViewTopLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet private var timeDateTopLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet private var timeDateBottomLayoutConstraint: NSLayoutConstraint!
     
     // MARK: Stored Properties
     
     internal var tweet: Tweet!
-    
+
     // MARK: Lifecycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupOutlets()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
     }
     
     // MARK: Helpers
@@ -91,10 +93,10 @@ internal class TweetDetailVC: UIViewController {
     }
     
     private func setupMediaImageView() {
+        mediaImageView.layer.cornerRadius = 10
+        mediaImageView.image = nil
         if let mediaURL = tweet.mediaURL {
             mediaImageView.setImageWith(mediaURL)
-        } else {
-            mediaImageView.image = nil
         }
     }
     
@@ -102,7 +104,7 @@ internal class TweetDetailVC: UIViewController {
         setupUserProfileImageView()
         if tweet.isRetweetedTweet {
             nameLabel.text = tweet.retweetSourceUser?.name
-            screenNameLabel.text = tweet.retweetSourceUser?.screenName
+            screenNameLabel.text = "@\(tweet.retweetSourceUser?.screenName ?? "")"
         } else {
             nameLabel.text = tweet.user?.name
             screenNameLabel.text = tweet.user?.screenName
@@ -121,8 +123,8 @@ internal class TweetDetailVC: UIViewController {
     /// Adjusts constant of constraints based on views
     
     private func layoutOutletConstraints() {
-        timeDateTopLayoutConstraint.constant = tweet.mediaURL != nil ? 315.5 : 8
-        profileImageViewTopLayoutConstraint.constant = tweet.isRetweetedTweet || tweet.inReplyToScreenName != nil ? 40 : 8
+        timeDateBottomLayoutConstraint.constant = tweet.mediaURL != nil ? 249 : 8
+        profileImageViewTopLayoutConstraint.constant = tweet.isRetweetedTweet || tweet.inReplyToScreenName != nil ? 22 : 0
+        self.view.layoutIfNeeded()
     }
-    
 }
