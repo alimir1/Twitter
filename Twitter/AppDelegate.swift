@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Helpers
     
-    func setupLoginVCWithObservers() {
+    private func setupLoginVCWithObservers() {
         if User.isUserLoggedIn {
             let tweetsNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsNavCtrl")
             window?.rootViewController = tweetsNavVC
