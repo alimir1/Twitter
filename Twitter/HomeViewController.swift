@@ -18,6 +18,11 @@ internal class HomeViewController: UIViewController {
     // MARK: Stored Properties
     
     fileprivate var refreshControl: UIRefreshControl!
+    fileprivate var favoriteTweets = [Int : Bool]()
+    fileprivate var retweetedTweets = [Int : Bool]()
+    fileprivate var isFetchingMoreData = false
+    
+    // MARK: Property Observers
     
     internal var tweets = [Tweet]() {
         didSet {
@@ -28,8 +33,7 @@ internal class HomeViewController: UIViewController {
         }
     }
     
-    fileprivate var favoriteTweets = [Int : Bool]()
-    fileprivate var retweetedTweets = [Int : Bool]()
+    
     
     // MARK: Lifecycles
     
@@ -54,6 +58,7 @@ extension HomeViewController {
     fileprivate func setupViews() {
         setupRefreshControl()
         setupTableView()
+        setupFooterViewForInfiniteScrolling()
     }
     
     fileprivate func setupRefreshControl() {
@@ -77,22 +82,27 @@ extension HomeViewController {
 // MARK: - Networking
 
 extension HomeViewController {
-    
-    @objc fileprivate func refreshPage() {
-        fetchData(shouldGetNextPage: true)
-    }
-    
+
     fileprivate func fetchData(shouldGetNextPage: Bool) {
         MBProgressHUD.showAdded(to: view, animated: true)
+        isFetchingMoreData = shouldGetNextPage
         TwitterClient.shared.tweets(from: .homeTimeline, shouldGetNextPage: shouldGetNextPage) {
             tweets, error in
             if let tweets = tweets {
-                self.tweets = tweets
+                if shouldGetNextPage {
+                    for tweet in tweets {
+                        self.tweets.append(tweet)
+                    }
+                } else {
+                    self.tweets = tweets
+                }
                 self.tableView.reloadData()
             } else {
                 print("HomeViewController: no tweets!")
                 print(error!.localizedDescription)
             }
+            self.isFetchingMoreData = false
+            self.hideActivityIndicatorFooterView()
             self.endRefreshing()
             MBProgressHUD.hide(for: self.view, animated: true)
         }
@@ -127,9 +137,45 @@ extension HomeViewController {
     }
 }
 
+// MARK: - Infinite Scrolling
+
+extension HomeViewController: UIScrollViewDelegate {
+    
+    fileprivate func setupFooterViewForInfiniteScrolling() {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 150))
+        footerView.backgroundColor = .white
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.center = footerView.center
+        tableView.tableFooterView = footerView
+        tableView.tableFooterView?.isHidden = true
+    }
+    
+    fileprivate func hideActivityIndicatorFooterView() {
+        tableView.tableFooterView?.isHidden = true
+    }
+    
+    fileprivate func showActivityIndicatorFooterView() {
+        tableView.tableFooterView?.isHidden = false
+    }
+    
+    internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !isFetchingMoreData else { return }
+        if scrollView.contentOffset.y > tableView.contentSize.height - tableView.bounds.height && tableView.isDragging {
+            showActivityIndicatorFooterView()
+            fetchData(shouldGetNextPage: true)
+        }
+    }
+}
+
 // MARK: - Helpers
 
 extension HomeViewController {
+    
+    @objc fileprivate func refreshPage() {
+        fetchData(shouldGetNextPage: false)
+    }
+    
     func addTweetToTableView(tweet: Tweet) {
         self.tweets.insert(tweet, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
