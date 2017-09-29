@@ -1,5 +1,5 @@
 //
-//  HomeCell.swift
+//  TweetsCell.swift
 //  Twitter
 //
 //  Created by Ali Mir on 9/26/17.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-@objc protocol HomeCellDelegate: class {
-    @objc optional func homeCell(_ cell: HomeCell, didTapReply with: Tweet)
-    @objc optional func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet, shouldRetweet: Bool)
-    @objc optional func homeCell(_ cell: HomeCell, didTapFavorite with: Tweet, isFavorite: Bool)
+@objc protocol TweetsCellDelegate: class {
+    @objc optional func tweetsCell(_ cell: TweetsCell, didTapReply with: Tweet)
+    @objc optional func tweetsCell(_ cell: TweetsCell, didTapRetwet with: Tweet, shouldRetweet: Bool)
+    @objc optional func tweetsCell(_ cell: TweetsCell, didTapFavorite with: Tweet, isFavorite: Bool)
 }
 
-internal class HomeCell: UITableViewCell {
+internal class TweetsCell: UITableViewCell {
     
     // MARK: Outlets
 
@@ -53,7 +53,7 @@ internal class HomeCell: UITableViewCell {
     
     // MARK: Delegate Property
     
-    internal var delegate: HomeCellDelegate?
+    internal var delegate: TweetsCellDelegate?
     
     // MARK: Lifecycles
     
@@ -119,15 +119,15 @@ internal class HomeCell: UITableViewCell {
     // MARK: Target-action
     
     @IBAction private func onReplyTap(sender: AnyObject?) {
-        delegate?.homeCell?(self, didTapReply: tweet)
+        delegate?.tweetsCell?(self, didTapReply: tweet)
     }
     
     @IBAction private func onRetweetTap(_ sender: UIButton) {
-        delegate?.homeCell?(self, didTapRetwet: tweet, shouldRetweet: !isRetweeted)
+        delegate?.tweetsCell?(self, didTapRetwet: tweet, shouldRetweet: !isRetweeted)
     }
     
     @IBAction func onFavoritesTap(_ sender: UIButton) {
-        delegate?.homeCell?(self, didTapFavorite: tweet, isFavorite: !isFavorited)
+        delegate?.tweetsCell?(self, didTapFavorite: tweet, isFavorite: !isFavorited)
     }
     
     // MARK: Helpers

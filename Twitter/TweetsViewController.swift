@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  TweetsViewController.swift
 //  Twitter
 //
 //  Created by Ali Mir on 9/26/17.
@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-internal class HomeViewController: UIViewController {
+internal class TweetsViewController: UIViewController {
     
     // MARK: Outlets
     
@@ -53,7 +53,7 @@ internal class HomeViewController: UIViewController {
 
 // MARK: - Setup Views
 
-extension HomeViewController {
+extension TweetsViewController {
     
     fileprivate func setupViews() {
         setupRefreshControl()
@@ -81,7 +81,7 @@ extension HomeViewController {
 
 // MARK: - Networking
 
-extension HomeViewController {
+extension TweetsViewController {
 
     fileprivate func fetchData(shouldGetNextPage: Bool) {
         MBProgressHUD.showAdded(to: view, animated: true)
@@ -98,11 +98,10 @@ extension HomeViewController {
                 }
                 self.tableView.reloadData()
             } else {
-                print("HomeViewController: no tweets!")
+                print("TweetsViewController: no tweets!")
                 print(error!.localizedDescription)
             }
             self.isFetchingMoreData = false
-            self.hideActivityIndicatorFooterView()
             self.endRefreshing()
             MBProgressHUD.hide(for: self.view, animated: true)
         }
@@ -111,7 +110,7 @@ extension HomeViewController {
 
 // MARKL: - Navigation
 
-extension HomeViewController {
+extension TweetsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "postTweetVC" {
             let postVC = segue.destination as! PostViewController
@@ -139,7 +138,7 @@ extension HomeViewController {
 
 // MARK: - Infinite Scrolling
 
-extension HomeViewController: UIScrollViewDelegate {
+extension TweetsViewController: UIScrollViewDelegate {
     
     fileprivate func setupFooterViewForInfiniteScrolling() {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 150))
@@ -147,22 +146,13 @@ extension HomeViewController: UIScrollViewDelegate {
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityIndicatorView.startAnimating()
         activityIndicatorView.center = footerView.center
+        footerView.addSubview(activityIndicatorView)
         tableView.tableFooterView = footerView
-        tableView.tableFooterView?.isHidden = true
-    }
-    
-    fileprivate func hideActivityIndicatorFooterView() {
-        tableView.tableFooterView?.isHidden = true
-    }
-    
-    fileprivate func showActivityIndicatorFooterView() {
-        tableView.tableFooterView?.isHidden = false
     }
     
     internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard !isFetchingMoreData else { return }
         if scrollView.contentOffset.y > tableView.contentSize.height - tableView.bounds.height && tableView.isDragging {
-            showActivityIndicatorFooterView()
             fetchData(shouldGetNextPage: true)
         }
     }
@@ -170,7 +160,7 @@ extension HomeViewController: UIScrollViewDelegate {
 
 // MARK: - Helpers
 
-extension HomeViewController {
+extension TweetsViewController {
     
     @objc fileprivate func refreshPage() {
         fetchData(shouldGetNextPage: false)
@@ -182,7 +172,7 @@ extension HomeViewController {
         self.tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
-    func handleUpdatedRetwet(indexPath: IndexPath, isRetweeted: Bool, cell: HomeCell) {
+    func handleUpdatedRetwet(indexPath: IndexPath, isRetweeted: Bool, cell: TweetsCell) {
         self.retweetedTweets[indexPath.row] = isRetweeted
         self.tweets[indexPath.row].isRetweeted = isRetweeted
         cell.isRetweeted = isRetweeted
@@ -192,7 +182,7 @@ extension HomeViewController {
         cell.tweet = self.tweets[indexPath.row]
     }
     
-    func handleUpdatedFavorite(indexPath: IndexPath, isFavorite: Bool, cell: HomeCell) {
+    func handleUpdatedFavorite(indexPath: IndexPath, isFavorite: Bool, cell: TweetsCell) {
         self.favoriteTweets[indexPath.row] = isFavorite
         self.tweets[indexPath.row].isFavorited = isFavorite
         cell.isFavorited = isFavorite
@@ -203,10 +193,10 @@ extension HomeViewController {
     }
 }
 
-// MARK: - HomeCellDelegate
+// MARK: - TweetsCellDelegate
 
-extension HomeViewController: HomeCellDelegate {
-    func homeCell(_ cell: HomeCell, didTapReply with: Tweet) {
+extension TweetsViewController: TweetsCellDelegate {
+    func tweetsCell(_ cell: TweetsCell, didTapReply with: Tweet) {
         let replyVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "replyVC") as! ReplyViewController
         replyVC.replyingToTweet = with
         replyVC.replyAction = {
@@ -218,7 +208,7 @@ extension HomeViewController: HomeCellDelegate {
         present(replyVC, animated: true, completion: nil)
     }
     
-    func homeCell(_ cell: HomeCell, didTapRetwet with: Tweet, shouldRetweet: Bool) {
+    func tweetsCell(_ cell: TweetsCell, didTapRetwet with: Tweet, shouldRetweet: Bool) {
         let indexPath = tableView.indexPath(for: cell)!
         
         guard shouldRetweet else {
@@ -245,7 +235,7 @@ extension HomeViewController: HomeCellDelegate {
         present(retweetVC, animated: false, completion: nil)
     }
     
-    func homeCell(_ cell: HomeCell, didTapFavorite with: Tweet, isFavorite: Bool) {
+    func tweetsCell(_ cell: TweetsCell, didTapFavorite with: Tweet, isFavorite: Bool) {
         let indexPath = tableView.indexPath(for: cell)!
         MBProgressHUD.showAdded(to: self.view, animated: true)
         TwitterClient.shared.changeLike(isLiked: isFavorite, id: with.id!) {
@@ -262,14 +252,14 @@ extension HomeViewController: HomeCellDelegate {
 
 // MARK: - TableView
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+extension TweetsViewController: UITableViewDelegate, UITableViewDataSource {
     
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "homeCell") as! HomeCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tweetsCell") as! TweetsCell
         let tweet = tweets[indexPath.row]
         cell.tweet = tweet
         cell.delegate = self
