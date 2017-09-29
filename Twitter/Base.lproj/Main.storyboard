@@ -747,6 +747,9 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="l6P-Pp-Y2z"/>
+                                    <barButtonItem enabled="NO" title="0" id="23P-3p-XgH">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </barButtonItem>
                                     <barButtonItem title="Tweet" id="fBq-sy-ErP">
                                         <connections>
                                             <action selector="onReplyTapWithSender:" destination="GT6-Vt-5SM" id="upT-3f-jR7"/>
@@ -825,6 +828,7 @@
                         <outlet property="currentUserProfileImageView" destination="RwT-Ed-ccF" id="TFR-ch-3va"/>
                         <outlet property="replyTextView" destination="ajV-VS-puI" id="BlD-vV-ktk"/>
                         <outlet property="replyingToLabel" destination="K0P-Wi-7vj" id="wFv-oB-wXk"/>
+                        <outlet property="textLimitCount" destination="23P-3p-XgH" id="wA2-on-6hb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jP0-h0-hXN" userLabel="First Responder" sceneMemberID="firstResponder"/>

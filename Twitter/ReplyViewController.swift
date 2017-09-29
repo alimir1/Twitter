@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-internal class ReplyViewController: UIViewController {
+internal class ReplyViewController: UIViewController, UITextViewDelegate {
     
     // MARK: Outlets
     
@@ -17,6 +17,7 @@ internal class ReplyViewController: UIViewController {
     @IBOutlet private var replyTextView: UITextView!
     @IBOutlet private var currentUserProfileImageView: UIImageView!
     @IBOutlet private var replyingToLabel: UILabel!
+    @IBOutlet private var textLimitCount: UIBarButtonItem!
     
     // MARK: Stored Properties
     
@@ -36,6 +37,20 @@ internal class ReplyViewController: UIViewController {
         return users
     }
     
+    private var usersToReplyToString: String {
+        return replyToUsers.joined(separator: " ")
+    }
+    
+    private var initTextRemaining: Int {
+        return 140 - usersToReplyToString.characters.count
+    }
+    
+    private var remainingTextCount: Int = 0 {
+        didSet {
+            textLimitCount.title = "\(remainingTextCount)"
+        }
+    }
+    
     // MARK: Lifecycles
     
     override func viewDidLoad() {
@@ -43,15 +58,16 @@ internal class ReplyViewController: UIViewController {
         addKeyboardObservers()
         replyTextView.becomeFirstResponder()
         setupViews()
+        remainingTextCount = initTextRemaining
     }
     
     // MARK: Views Setup
     
     private func setupViews() {
-        setupLabels()
+        setupOutlets()
     }
     
-    private func setupLabels() {
+    private func setupOutlets() {
         if let userImageURL = User.currentUser?.profileURL {
             currentUserProfileImageView.setImageWith(userImageURL)
         }
@@ -69,11 +85,10 @@ internal class ReplyViewController: UIViewController {
     }
     
     @IBAction private func onReplyTap(sender: AnyObject?) {
-        guard !replyTextView.text.isEmpty else { return } // FIXME: Should notify user.
+        guard !replyTextView.text.isEmpty && remainingTextCount > 0 else { return } // FIXME: Should notify user.
         
-        let usersToReplyTo = replyToUsers.joined(separator: " ")
         let status = replyTextView.text!
-        let tweetStatus = "\(usersToReplyTo) \(status)"
+        let tweetStatus = "\(usersToReplyToString) \(status)"
         
         MBProgressHUD.showAdded(to: view, animated: true)
         
@@ -115,6 +130,12 @@ internal class ReplyViewController: UIViewController {
                 self.view.layoutIfNeeded()
             }
         }
+    }
+    
+    // MAKR: TextView delegate
+    
+    func textViewDidChange(_ textView: UITextView) {
+        remainingTextCount = initTextRemaining - textView.text.characters.count
     }
     
 }
