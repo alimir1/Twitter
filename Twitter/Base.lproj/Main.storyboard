@@ -391,17 +391,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5Cw-0W-rsi" userLabel="Status Stack View">
-                                                    <rect key="frame" x="8" y="8" width="104" height="14"/>
+                                                    <rect key="frame" x="8" y="8" width="108" height="17"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s9d-UI-457">
-                                                            <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="17" height="17"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="14" id="EuI-IQ-aso"/>
-                                                                <constraint firstAttribute="width" constant="14" id="W55-wM-Xyt"/>
+                                                                <constraint firstAttribute="height" constant="17" id="EuI-IQ-aso"/>
+                                                                <constraint firstAttribute="width" constant="17" id="W55-wM-Xyt"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTq-Ul-823">
-                                                            <rect key="frame" x="22" y="0.0" width="82" height="14"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Stgtus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTq-Ul-823">
+                                                            <rect key="frame" x="25" y="0.0" width="83" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -428,9 +428,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sL8-kA-jzr">
-                                                    <rect key="frame" x="8" y="159" width="359" height="200"/>
+                                                    <rect key="frame" x="8" y="159" width="359" height="233"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="200" id="c0T-DO-GZY"/>
+                                                        <constraint firstAttribute="height" constant="233" id="c0T-DO-GZY"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYh-AG-LBj">
@@ -451,6 +451,7 @@
                                                 <constraint firstItem="fu4-WS-bir" firstAttribute="leading" secondItem="3tX-yf-3rj" secondAttribute="leading" constant="8" id="4e7-75-gvI"/>
                                                 <constraint firstItem="sL8-kA-jzr" firstAttribute="leading" secondItem="3tX-yf-3rj" secondAttribute="leading" constant="8" id="5sv-tD-yMR"/>
                                                 <constraint firstItem="78D-rO-j7N" firstAttribute="leading" secondItem="3tX-yf-3rj" secondAttribute="leading" constant="8" id="AOa-6W-zrH"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fu4-WS-bir" secondAttribute="bottom" constant="241" id="DKS-nN-kE7"/>
                                                 <constraint firstItem="QfB-LW-K6Y" firstAttribute="leading" secondItem="xYh-AG-LBj" secondAttribute="leading" id="J9X-14-CVG"/>
                                                 <constraint firstItem="xYh-AG-LBj" firstAttribute="leading" secondItem="78D-rO-j7N" secondAttribute="trailing" constant="8" id="JFE-GC-Mkm"/>
                                                 <constraint firstItem="sL8-kA-jzr" firstAttribute="top" secondItem="fu4-WS-bir" secondAttribute="bottom" constant="8" id="KMr-FK-b4R"/>
@@ -469,7 +470,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="fu4-WS-bir" secondAttribute="bottom" constant="249" id="VhR-Mf-gw1"/>
+                                            <constraint firstAttribute="bottom" secondItem="sL8-kA-jzr" secondAttribute="bottom" constant="8" id="C1n-9t-CeR"/>
                                         </constraints>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ZRD-9g-Ly8">
@@ -589,7 +590,7 @@
                         <outlet property="screenNameLabel" destination="QfB-LW-K6Y" id="mcc-uh-Cga"/>
                         <outlet property="statusStackView" destination="5Cw-0W-rsi" id="9nv-mA-vAi"/>
                         <outlet property="textLabel" destination="Mi0-Wr-kGL" id="gDh-0c-omK"/>
-                        <outlet property="timeDateBottomLayoutConstraint" destination="VhR-Mf-gw1" id="Ek5-75-FWa"/>
+                        <outlet property="timeDateBottomLayoutConstraint" destination="DKS-nN-kE7" id="pWm-Pv-agu"/>
                         <outlet property="tweetStatusImageView" destination="s9d-UI-457" id="Pxl-YE-mck"/>
                         <outlet property="tweetStatusLabel" destination="eTq-Ul-823" id="opG-6b-WWs"/>
                         <outlet property="userProfileImageView" destination="78D-rO-j7N" id="Ktc-tP-neu"/>

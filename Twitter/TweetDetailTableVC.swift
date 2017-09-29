@@ -39,8 +39,6 @@ internal class TweetDetailTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupOutlets()
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 44
     }
     
     // MARK: Helpers
@@ -125,9 +123,8 @@ internal class TweetDetailTableVC: UITableViewController {
     /// Adjusts constant of constraints based on views
     
     private func layoutOutletConstraints() {
-        timeDateBottomLayoutConstraint.constant = tweet.mediaURL != nil ? 249 : 8
+        timeDateBottomLayoutConstraint.constant = tweet.mediaURL != nil ? 241 : 0
         profileImageViewTopLayoutConstraint.constant = tweet.isRetweetedTweet || tweet.inReplyToScreenName != nil ? 22 : 0
-        self.view.layoutIfNeeded()
     }
     
     
@@ -195,6 +192,16 @@ internal class TweetDetailTableVC: UITableViewController {
         let replyVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "replyVC") as! ReplyViewController
         replyVC.replyingToTweet = tweet
         present(replyVC, animated: false, completion: nil)
+    }
+    
+    // MARK: TableView Methods
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
     }
     
 }
