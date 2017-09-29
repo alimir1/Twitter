@@ -107,6 +107,12 @@ extension HomeViewController {
                 }
             }
         }
+        
+        if segue.identifier == "tweetDetailVC" {
+            let tweetDetailVC = segue.destination as! TweetDetailVC
+            let indexPath = tableView.indexPathForSelectedRow!
+            tweetDetailVC.tweet = tweets[indexPath.row]
+        }
     }
 }
 
