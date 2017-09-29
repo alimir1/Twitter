@@ -540,14 +540,23 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3f-Xz-8f6">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="27.5"/>
                                                             <state key="normal" image="CommentUnfilled"/>
+                                                            <connections>
+                                                                <action selector="onCommentTap:" destination="ba6-tR-rhL" eventType="touchUpInside" id="uRY-br-Jlp"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLs-ir-KAJ">
                                                             <rect key="frame" x="113.5" y="0.0" width="32" height="27.5"/>
                                                             <state key="normal" image="RetweetUnfilled"/>
+                                                            <connections>
+                                                                <action selector="onRetweetTap:" destination="ba6-tR-rhL" eventType="touchUpInside" id="Zhx-Bv-AV1"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bpJ-ux-9Z2">
                                                             <rect key="frame" x="234" y="0.0" width="25" height="27.5"/>
                                                             <state key="normal" image="HeartUnfilled"/>
+                                                            <connections>
+                                                                <action selector="onLikeTap:" destination="ba6-tR-rhL" eventType="touchUpInside" id="cGk-j7-bXP"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>

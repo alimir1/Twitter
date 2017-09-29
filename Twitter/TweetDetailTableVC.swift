@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 internal class TweetDetailTableVC: UITableViewController {
     
@@ -31,6 +32,7 @@ internal class TweetDetailTableVC: UITableViewController {
     // MARK: Stored Properties
     
     internal var tweet: Tweet!
+    internal var updatedTweetAction: ((Tweet) -> Void)?
 
     // MARK: Lifecycles
     
@@ -127,4 +129,72 @@ internal class TweetDetailTableVC: UITableViewController {
         profileImageViewTopLayoutConstraint.constant = tweet.isRetweetedTweet || tweet.inReplyToScreenName != nil ? 22 : 0
         self.view.layoutIfNeeded()
     }
+    
+    
+    // MARK: Target-action
+    @IBAction private func onLikeTap(_ sender: Any) {
+        let shouldLike = !tweet.isFavorited
+        MBProgressHUD.showAdded(to: view, animated: true)
+        TwitterClient.shared.changeLike(isLiked: shouldLike, id: tweet.id!) {
+            success, error in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if success {
+                self.tweet.isFavorited = shouldLike
+                self.likeButton.isSelected = shouldLike
+                let favoritesCount = self.tweet.favoritesCount
+                let updateFavCount = shouldLike ? favoritesCount + 1 : favoritesCount - 1
+                self.tweet.setFavCount(updateFavCount)
+                self.likesCountLabel.text = "\(updateFavCount)"
+                self.updatedTweetAction?(self.tweet)
+                return
+            }
+            print(error!.localizedDescription)
+        }
+    }
+    @IBAction private func onRetweetTap(_ sender: Any) {
+        
+        let shouldRetweet = !tweet.isRetweeted
+        
+        if !shouldRetweet {
+            MBProgressHUD.showAdded(to: view, animated: true)
+            TwitterClient.shared.retweet(id: tweet.id!, shouldUntweet: true) {
+                success, error in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                if success {
+                    self.tweet.isRetweeted = false
+                    self.retweetButton.isSelected = false
+                    let retweetCount = self.tweet.retweetCount
+                    let updateRetweetCount = shouldRetweet ? retweetCount + 1 : retweetCount - 1
+                    self.tweet.setRetweetsCount(updateRetweetCount)
+                    self.retweetCountLabel.text = "\(updateRetweetCount)"
+                    self.updatedTweetAction?(self.tweet)
+                    return
+                }
+                print(error!.localizedDescription)
+            }
+            return
+        }
+        
+        let retweetVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "retweetVC") as! RetweetViewController
+        retweetVC.tweet = tweet
+        retweetVC.retweetAction = {
+            retweeted in
+            if retweeted {
+                self.tweet.isRetweeted = true
+                self.retweetButton.isSelected = true
+                let retweetCount = self.tweet.retweetCount
+                let updateRetweetCount = retweeted ? retweetCount + 1 : retweetCount - 1
+                self.tweet.setRetweetsCount(updateRetweetCount)
+                self.retweetCountLabel.text = "\(updateRetweetCount)"
+                self.updatedTweetAction?(self.tweet)
+            }
+        }
+        present(retweetVC, animated: false, completion: nil)
+    }
+    @IBAction private func onCommentTap(_ sender: Any) {
+        let replyVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "replyVC") as! ReplyViewController
+        replyVC.replyingToTweet = tweet
+        present(replyVC, animated: false, completion: nil)
+    }
+    
 }

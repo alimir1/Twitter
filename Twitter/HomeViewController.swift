@@ -112,6 +112,12 @@ extension HomeViewController {
             let tweetDetailVC = segue.destination as! TweetDetailTableVC
             let indexPath = tableView.indexPathForSelectedRow!
             tweetDetailVC.tweet = tweets[indexPath.row]
+            tweetDetailVC.updatedTweetAction = {
+                tweet in
+                self.retweetedTweets[indexPath.row] = tweet.isRetweeted
+                self.favoriteTweets[indexPath.row] = tweet.isFavorited
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
         }
     }
 }
