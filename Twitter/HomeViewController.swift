@@ -36,7 +36,7 @@ internal class HomeViewController: UIViewController {
     internal override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        fetchData()
+        fetchData(shouldGetNextPage: false)
     }
     
     // MARK: Target-Actions
@@ -58,7 +58,7 @@ extension HomeViewController {
     
     fileprivate func setupRefreshControl() {
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(fetchData), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshPage), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
     }
     
@@ -77,9 +77,14 @@ extension HomeViewController {
 // MARK: - Networking
 
 extension HomeViewController {
-    @objc fileprivate func fetchData() {
+    
+    @objc fileprivate func refreshPage() {
+        fetchData(shouldGetNextPage: true)
+    }
+    
+    fileprivate func fetchData(shouldGetNextPage: Bool) {
         MBProgressHUD.showAdded(to: view, animated: true)
-        TwitterClient.shared.tweets(from: .homeTimeline) {
+        TwitterClient.shared.tweets(from: .homeTimeline, shouldGetNextPage: shouldGetNextPage) {
             tweets, error in
             if let tweets = tweets {
                 self.tweets = tweets

@@ -143,7 +143,7 @@ extension TwitterClient {
         }
     }
     
-    internal func tweets(from source: TweetSource, completion: @escaping (_ response: [Tweet]?, _ error: Error?) -> Void) {
+    internal func tweets(from source: TweetSource, shouldGetNextPage: Bool, completion: @escaping (_ response: [Tweet]?, _ error: Error?) -> Void) {
         
         var requestURLString = ""
         
@@ -152,11 +152,25 @@ extension TwitterClient {
             requestURLString = RequestURL.timeline
         }
         
-        getRequest(requestURLString, with: ["include_entities" : true]) {
+        var parameters: [String : Any] = ["include_entities" : true]
+        if shouldGetNextPage {
+            parameters["max_id"] = Pagination.maxID
+            parameters["count"] = Pagination.count + 1
+        } else {
+             parameters["count"] = Pagination.count
+        }
+        
+        getRequest(requestURLString, with: parameters) {
             response, error in
             if let response = response {
-                let timeline = Tweet.tweets(from: response as! [NSDictionary])
-                completion(timeline, nil)
+                var timelineTweets = Tweet.tweets(from: response as! [NSDictionary])
+                if shouldGetNextPage && !timelineTweets.isEmpty {
+                    _ = timelineTweets.removeFirst()
+                }
+                if let lastTweet = timelineTweets.last {
+                    Pagination.maxID = lastTweet.id! // For pagination
+                }
+                completion(timelineTweets, nil)
             } else {
                 completion(nil, error)
             }
