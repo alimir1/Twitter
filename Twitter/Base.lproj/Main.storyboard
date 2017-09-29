@@ -378,9 +378,6 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WYw-OP-FqN">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                            </scrollView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BNc-Ro-Ess">
                                 <rect key="frame" x="8" y="40" width="68" height="68"/>
                                 <constraints>
@@ -527,8 +524,6 @@
                             <constraint firstAttribute="trailing" secondItem="pLA-e9-6wx" secondAttribute="trailing" constant="8" id="58O-zf-Kkd"/>
                             <constraint firstItem="PcD-js-Wzt" firstAttribute="top" secondItem="1Ba-D7-fKq" secondAttribute="bottom" constant="8" id="8rH-HX-sDK"/>
                             <constraint firstItem="pLA-e9-6wx" firstAttribute="top" secondItem="PcD-js-Wzt" secondAttribute="bottom" constant="8" id="9Qx-0P-GQi"/>
-                            <constraint firstItem="WYw-OP-FqN" firstAttribute="top" secondItem="7nD-ak-e0e" secondAttribute="bottom" id="9z2-5s-nB9"/>
-                            <constraint firstAttribute="trailing" secondItem="WYw-OP-FqN" secondAttribute="trailing" id="Chs-oz-vpm"/>
                             <constraint firstItem="eKG-t3-toZ" firstAttribute="top" secondItem="OAA-4L-nXU" secondAttribute="bottom" constant="8" id="IJJ-Ia-7oZ"/>
                             <constraint firstItem="ZN1-Yq-lzG" firstAttribute="top" secondItem="7nD-ak-e0e" secondAttribute="bottom" constant="8" id="JaB-eo-tfD"/>
                             <constraint firstItem="MCb-2C-Yn8" firstAttribute="leading" secondItem="5PU-Uz-St3" secondAttribute="leading" id="JpI-M4-Izh"/>
@@ -538,7 +533,6 @@
                             <constraint firstItem="1Ba-D7-fKq" firstAttribute="leading" secondItem="oPG-qS-2xF" secondAttribute="leading" id="M12-pO-7xj"/>
                             <constraint firstAttribute="trailing" secondItem="MCb-2C-Yn8" secondAttribute="trailing" id="OdP-0U-Riv"/>
                             <constraint firstItem="PcD-js-Wzt" firstAttribute="leading" secondItem="oPG-qS-2xF" secondAttribute="leading" id="PC1-2F-q9v"/>
-                            <constraint firstItem="WYw-OP-FqN" firstAttribute="leading" secondItem="5PU-Uz-St3" secondAttribute="leading" id="XBo-7X-QBp"/>
                             <constraint firstAttribute="trailing" secondItem="1Ba-D7-fKq" secondAttribute="trailing" constant="8" id="b3A-fK-3GM"/>
                             <constraint firstItem="1Ba-D7-fKq" firstAttribute="top" secondItem="oPG-qS-2xF" secondAttribute="bottom" constant="8" id="cfQ-eR-aS6"/>
                             <constraint firstItem="oPG-qS-2xF" firstAttribute="leading" secondItem="BNc-Ro-Ess" secondAttribute="trailing" constant="8" id="iTV-W3-8Ql"/>
@@ -550,7 +544,6 @@
                             <constraint firstItem="BNc-Ro-Ess" firstAttribute="leading" secondItem="5PU-Uz-St3" secondAttribute="leading" constant="8" id="v6C-df-COV"/>
                             <constraint firstItem="ZN1-Yq-lzG" firstAttribute="leading" secondItem="5PU-Uz-St3" secondAttribute="leading" constant="8" id="wPj-Dr-rBS"/>
                             <constraint firstItem="MCb-2C-Yn8" firstAttribute="top" secondItem="eKG-t3-toZ" secondAttribute="bottom" constant="8" id="whA-az-mOo"/>
-                            <constraint firstItem="a3Y-rK-VcA" firstAttribute="top" secondItem="WYw-OP-FqN" secondAttribute="bottom" id="z7G-sy-U4X"/>
                         </constraints>
                     </view>
                     <connections>
