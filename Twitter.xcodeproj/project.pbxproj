@@ -113,8 +113,8 @@
 		494483A81F7AB61D009A099C /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				49194DB51F7D980200147CE3 /* Extensions */,
 				494483A91F7AB61D009A099C /* AppDelegate.swift */,
+				49194DB51F7D980200147CE3 /* Extensions */,
 				494483BB1F7AC741009A099C /* TwitterAPI */,
 				492416781F7AD80600AB0E97 /* Models */,
 				492416811F7AFDFA00AB0E97 /* Controllers */,
