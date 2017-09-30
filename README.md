@@ -30,10 +30,10 @@ The following **additional** features are implemented:
 - [x] Supports multiple endpoints for timeline: Home, Mentions, & User.
 - [x] Displays media photos for tweets that have media images.
 - [x] Modal presentation for post, reply, and retweet with nice background blur.
-- [x] 'Retweet' and 'like' statuses are updated instantly in HomeVC whenever user makes changes in HomeDetailVC (without reloading the tableView or fetching it from API).
+- [x] 'Retweet' and 'like' statuses are updated instantly in TweetsVC whenever user makes changes (without reloading the tableView or fetching it from backend).
 - [x] Shows activity indicator view.
 - [x] Login screen with UX/UI design.
-- [x] Statuses for tweets such as "Replying to" and "Retweet by" on top of appropriate cells.
+- [x] Statuses are displayed for tweets that were replied or retweeted by users on top of appropriate cells.
 - [x] Tweets are validated (ie less than max. allowed characters + should not be empty) before sending to API server.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
