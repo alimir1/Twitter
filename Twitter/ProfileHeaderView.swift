@@ -21,15 +21,24 @@ internal class ProfileHeaderView: UIView {
     @IBOutlet private var followingCountLabel: UILabel!
     @IBOutlet private var followersCountLabel: UILabel!
     
-    internal var user: User! {
+    internal var user: User? {
         didSet {
-            headerImageView.image = #imageLiteral(resourceName: "HeartFilled")
-            profileImageView.setImageWith(user.profileURL!)
-            nameLabel.text = user.name!
-            screenNameLabel.text = "@" + user.screenName!
-            tweetsCountLabel.text = "\(user.tweetsCount)"
-            followersCountLabel.text = "\(user.followersCount)"
-            followingCountLabel.text = "\(user.followingCount)"
+            if let user = user {
+                if let bannerImageURL = user.profileBannerImageURL {
+                    headerImageView.setImageWith(bannerImageURL)
+                    print("has url: \(bannerImageURL)")
+                } else {
+                    headerImageView.image = #imageLiteral(resourceName: "noBannerImage")
+                }
+                if let profileURL = user.profileURL {
+                    profileImageView.setImageWith(profileURL)
+                }
+                nameLabel.text = user.name!
+                screenNameLabel.text = "@" + user.screenName!
+                tweetsCountLabel.text = "\(user.tweetsCount)"
+                followersCountLabel.text = "\(user.followersCount)"
+                followingCountLabel.text = "\(user.followingCount)"
+            }
         }
     }
     

@@ -40,8 +40,8 @@ internal class TwitterClient: BDBOAuth1SessionManager {
                 self.createAccount {
                     user, error in
                     if let user = user {
-                        self.loginSuccess?()
                         User.setCurrentUser(user: user)
+                        self.loginSuccess?()
                     } else {
                         self.loginFailure?(error!)
                     }

@@ -130,6 +130,7 @@ fileprivate class MenuViewController: UIViewController, UITableViewDelegate, UIT
         userNavVC.title = "Profile"
         userVC.title = User.currentUser?.name ?? "Profile"
         userVC.endpoint = .userTimeLine
+        userVC.displayUser = User.currentUser
         
         return [homeNavVC, mentionsNavVC, userNavVC]
     }()

@@ -25,6 +25,7 @@ internal class User: NSObject {
     private(set) var screenName: String?
     private(set) var followersCount: Int = 0
     private(set) var profileURL: URL?
+    private(set) var profileBannerImageURL: URL?
     private(set) var tweetsCount: Int = 0
     private(set) var followingCount: Int = 0
     private(set) var isVerified: Bool?
@@ -84,6 +85,10 @@ internal class User: NSObject {
         
         if let profileURLString = dictionary["profile_image_url_https"] as? String {
             profileURL = URL(string: profileURLString)
+        }
+        
+        if let profileBannerImageURLString = dictionary["profile_banner_url"] as? String {
+            profileBannerImageURL = URL(string: profileBannerImageURLString)
         }
         
         self.tweetsCount = (dictionary["statuses_count"] as? Int) ?? 0

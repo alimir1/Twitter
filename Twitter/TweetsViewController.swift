@@ -21,7 +21,9 @@ internal class TweetsViewController: UIViewController {
     fileprivate var favoriteTweets = [Int : Bool]()
     fileprivate var retweetedTweets = [Int : Bool]()
     fileprivate var isFetchingMoreData = false
+    fileprivate var profileHeaderView: ProfileHeaderView?
     internal var endpoint: TweetSource!
+    internal var displayUser: User?
     
     // MARK: Property Observers
     
@@ -69,12 +71,20 @@ extension TweetsViewController {
     fileprivate func setupTableView() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        setupTableViewHeaderView()
     }
     
     fileprivate func endRefreshing() {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }
+    }
+    
+    fileprivate func setupTableViewHeaderView() {
+        guard displayUser != nil else { return }
+        profileHeaderView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 230))
+        profileHeaderView?.user = displayUser
+        tableView.tableHeaderView = profileHeaderView
     }
 }
 
@@ -140,11 +150,11 @@ extension TweetsViewController {
 extension TweetsViewController: UIScrollViewDelegate {
     
     fileprivate func setupFooterViewForInfiniteScrolling() {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 150))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 50))
         footerView.backgroundColor = .white
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityIndicatorView.startAnimating()
-        activityIndicatorView.center = footerView.center
+        activityIndicatorView.frame = footerView.bounds
         footerView.addSubview(activityIndicatorView)
         tableView.tableFooterView = footerView
     }
@@ -163,6 +173,7 @@ extension TweetsViewController {
     
     @objc fileprivate func refreshPage() {
         fetchData(shouldGetNextPage: false)
+        profileHeaderView?.user = displayUser
     }
     
     func addTweetToTableView(tweet: Tweet) {
