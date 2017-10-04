@@ -77,6 +77,49 @@
             </objects>
             <point key="canvasLocation" x="29.600000000000001" y="129.98500749625188"/>
         </scene>
+        <!--Menu Container View Controller-->
+        <scene sceneID="cMt-gI-L5r">
+            <objects>
+                <viewController storyboardIdentifier="menuContainerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gYs-O4-gan" customClass="MenuContainerViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Upu-Bb-8gN"/>
+                        <viewControllerLayoutGuide type="bottom" id="s2I-Yc-WZ9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Yhb-xd-AE6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4zG-SS-V1h" userLabel="Menu View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AWv-Ky-ZN9" userLabel="Content View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AWv-Ky-ZN9" firstAttribute="width" secondItem="Yhb-xd-AE6" secondAttribute="width" id="1JZ-JW-yeJ"/>
+                            <constraint firstAttribute="trailing" secondItem="4zG-SS-V1h" secondAttribute="trailing" id="4Cb-v5-6Ce"/>
+                            <constraint firstItem="4zG-SS-V1h" firstAttribute="leading" secondItem="Yhb-xd-AE6" secondAttribute="leading" id="7fm-k3-bgn"/>
+                            <constraint firstItem="4zG-SS-V1h" firstAttribute="top" secondItem="Yhb-xd-AE6" secondAttribute="top" id="DTb-Ag-pEj"/>
+                            <constraint firstItem="s2I-Yc-WZ9" firstAttribute="top" secondItem="4zG-SS-V1h" secondAttribute="bottom" id="RuA-ep-CnF"/>
+                            <constraint firstItem="s2I-Yc-WZ9" firstAttribute="top" secondItem="AWv-Ky-ZN9" secondAttribute="bottom" id="goz-Um-EXs"/>
+                            <constraint firstItem="AWv-Ky-ZN9" firstAttribute="top" secondItem="Yhb-xd-AE6" secondAttribute="top" id="n1H-v2-lvj"/>
+                            <constraint firstItem="AWv-Ky-ZN9" firstAttribute="leading" secondItem="Yhb-xd-AE6" secondAttribute="leading" id="ymS-u9-lpj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="AWv-Ky-ZN9" id="FLr-gj-fdI"/>
+                        <outlet property="contentViewLeadingConstraint" destination="ymS-u9-lpj" id="Nau-jr-BL6"/>
+                        <outlet property="menuView" destination="4zG-SS-V1h" id="YtR-co-8Pt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xz8-oQ-Qp2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="194.40000000000001" y="1151.8740629685158"/>
+        </scene>
         <!--Tweets View Controller-->
         <scene sceneID="y47-xz-5vb">
             <objects>
@@ -781,20 +824,6 @@
                 <tapGestureRecognizer id="I6d-7l-7Dv"/>
             </objects>
             <point key="canvasLocation" x="1976.8" y="-547.37631184407803"/>
-        </scene>
-        <!--Tweets Tab BarVC-->
-        <scene sceneID="FAB-w1-KwQ">
-            <objects>
-                <tabBarController storyboardIdentifier="tweetsTabBarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pAo-aN-LD6" customClass="TweetsTabBarVC" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="E43-ik-LDh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="k7B-38-Dyv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="30" y="880"/>
         </scene>
         <!--Reply View Controller-->
         <scene sceneID="Rpx-7o-nfB">

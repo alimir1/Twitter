@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupLoginVCWithObservers() {
         if User.isUserLoggedIn {
-            let toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsTabBarVC")
+            let toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "menuContainerVC")
             window?.rootViewController = toVC
         }
         
