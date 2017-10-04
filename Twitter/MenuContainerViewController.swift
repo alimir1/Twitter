@@ -28,7 +28,6 @@ internal class MenuContainerViewController: UIViewController {
     
     internal var contentViewController: UIViewController! {
         didSet(oldVC) {
-            
             UIView.animate(withDuration: 0.3) {
                 self.contentViewLeadingConstraint.constant = 0
                 self.view.layoutIfNeeded()
@@ -37,10 +36,7 @@ internal class MenuContainerViewController: UIViewController {
             if oldVC != nil {
                 removeViewController(oldVC)
             }
-            
             addViewController(contentViewController, to: contentView)
-            
-            
         }
     }
     
@@ -145,12 +141,21 @@ fileprivate class MenuViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        containerVC.contentViewController = viewControllers[0]
+        view.backgroundColor = UIColor(red:0.38, green:0.65, blue:1.00, alpha:1.0)
+        setupTableView()
+    }
+    
+    // MAKR: Setup Views
+    
+    func setupTableView() {
         tableView = UITableView(frame: view.frame)
+        tableView.frame.origin.y = 50
+        tableView.backgroundColor = UIColor(red:0.38, green:0.65, blue:1.00, alpha:1.0)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "menuCell")
-        containerVC.contentViewController = viewControllers[0]
         tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
@@ -161,9 +166,15 @@ fileprivate class MenuViewController: UIViewController, UITableViewDelegate, UIT
         containerVC.contentViewController = viewControllers[indexPath.row]
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuCell")!
+        cell.backgroundColor = UIColor(red:0.38, green:0.65, blue:1.00, alpha:1.0)
         let vc = viewControllers[indexPath.row]
+        cell.textLabel?.textColor = .white
         cell.textLabel?.text = vc.title
         return cell
     }
