@@ -145,7 +145,7 @@ extension TwitterClient {
         }
     }
     
-    internal func tweets(from source: TweetSource, shouldGetNextPage: Bool, completion: @escaping (_ response: [Tweet]?, _ error: Error?) -> Void) {
+    internal func tweets(from source: TweetSource, for screenName: String?, shouldGetNextPage: Bool, completion: @escaping (_ response: [Tweet]?, _ error: Error?) -> Void) {
         
         var requestURLString = ""
         
@@ -159,6 +159,9 @@ extension TwitterClient {
         }
         
         var parameters: [String : Any] = ["include_entities" : true]
+        if let screenName = screenName {
+            parameters["screen_name"] = screenName
+        }
         if shouldGetNextPage {
             parameters["max_id"] = Pagination.maxID
             parameters["count"] = Pagination.count + 1

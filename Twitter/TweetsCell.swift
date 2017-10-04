@@ -12,6 +12,7 @@ import UIKit
     @objc optional func tweetsCell(_ cell: TweetsCell, didTapReply with: Tweet)
     @objc optional func tweetsCell(_ cell: TweetsCell, didTapRetwet with: Tweet, shouldRetweet: Bool)
     @objc optional func tweetsCell(_ cell: TweetsCell, didTapFavorite with: Tweet, isFavorite: Bool)
+    @objc optional func tweetsCell(_ cell: TweetsCell, didTapProfileImage with: Tweet, tappedUser: User)
 }
 
 internal class TweetsCell: UITableViewCell {
@@ -39,6 +40,8 @@ internal class TweetsCell: UITableViewCell {
             setupCell()
         }
     }
+    
+    private var displayUser: User!
     
     internal var isFavorited: Bool = false {
         didSet {
@@ -70,6 +73,10 @@ internal class TweetsCell: UITableViewCell {
         topConstraint.constant = 8
         optionsStackViewVerticalConstraint.constant = 8
         setupButtons()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onProfileImageTap))
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(tapGestureRecognizer)
         
         if let mediaURL = tweet.mediaURL {
             mediaImageView.setImageWith(mediaURL)
@@ -104,6 +111,7 @@ internal class TweetsCell: UITableViewCell {
         profileImageView.setImageWith(tweet.retweetSourceUser!.profileURL!)
         usernameSmallLabel.text = "@\(tweet.retweetSourceUser!.screenName!)"
         usernameLabel.text = tweet.retweetSourceUser?.name
+        displayUser = tweet.retweetSourceUser
         retweeterNameLabel.text = "\(tweet.user!.name!) retweeted"
         retweetStackView.isHidden = false
         topConstraint.constant = 24
@@ -114,11 +122,12 @@ internal class TweetsCell: UITableViewCell {
         profileImageView.setImageWith(tweet.user!.profileURL!)
         usernameSmallLabel.text = "@\(tweet.user!.screenName!)"
         usernameLabel.text = tweet.user?.name
+        displayUser = tweet.user
     }
     
     // MARK: Target-action
     
-    @IBAction private func onReplyTap(sender: AnyObject?) {
+    @IBAction private func onReplyTap(_ sender: UIButton) {
         delegate?.tweetsCell?(self, didTapReply: tweet)
     }
     
@@ -126,8 +135,12 @@ internal class TweetsCell: UITableViewCell {
         delegate?.tweetsCell?(self, didTapRetwet: tweet, shouldRetweet: !isRetweeted)
     }
     
-    @IBAction func onFavoritesTap(_ sender: UIButton) {
+    @IBAction private func onFavoritesTap(_ sender: UIButton) {
         delegate?.tweetsCell?(self, didTapFavorite: tweet, isFavorite: !isFavorited)
+    }
+    
+    @objc private func onProfileImageTap(_ sender: AnyObject?) {
+        delegate?.tweetsCell?(self, didTapProfileImage: tweet, tappedUser: displayUser)
     }
     
     // MARK: Helpers

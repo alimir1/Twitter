@@ -111,7 +111,7 @@ internal class TweetDetailTableVC: UITableViewController {
             screenNameLabel.text = "@\(tweet.retweetSourceUser?.screenName ?? "")"
         } else {
             nameLabel.text = tweet.user?.name
-            screenNameLabel.text = tweet.user?.screenName
+            screenNameLabel.text = "@\(tweet.user?.screenName ?? "")"
         }
     }
     

@@ -49,7 +49,6 @@ internal class TweetsViewController: UIViewController {
     @IBAction private func onLogout(sender: AnyObject?) {
         TwitterClient.shared.logout()
     }
-    
 }
 
 // MARK: - Setup Views
@@ -95,7 +94,11 @@ extension TweetsViewController {
     fileprivate func fetchData(shouldGetNextPage: Bool) {
         MBProgressHUD.showAdded(to: view, animated: true)
         isFetchingMoreData = shouldGetNextPage
-        TwitterClient.shared.tweets(from: endpoint, shouldGetNextPage: shouldGetNextPage) {
+        var screenName: String? = nil
+        if let displayUser = displayUser {
+            screenName = displayUser.screenName
+        }
+        TwitterClient.shared.tweets(from: endpoint, for: screenName, shouldGetNextPage: shouldGetNextPage) {
             tweets, error in
             if let tweets = tweets {
                 if shouldGetNextPage {
@@ -216,6 +219,21 @@ extension TweetsViewController: TweetsCellDelegate {
             }
         }
         present(replyVC, animated: true, completion: nil)
+    }
+    
+    func tweetsCell(_ cell: TweetsCell, didTapProfileImage with: Tweet, tappedUser: User) {
+        if let displayUser = displayUser {
+            if tappedUser.screenName! == displayUser.screenName! {
+                // same users so exit function
+                return
+            }
+        }
+        let profileVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tweetsVC") as! TweetsViewController
+        profileVC.displayUser = tappedUser
+        profileVC.endpoint = .userTimeLine
+        profileVC.title = tappedUser.name ?? ""
+        profileVC.navigationItem.leftBarButtonItem = nil
+        self.navigationController?.show(profileVC, sender: self)
     }
     
     func tweetsCell(_ cell: TweetsCell, didTapRetwet with: Tweet, shouldRetweet: Bool) {
