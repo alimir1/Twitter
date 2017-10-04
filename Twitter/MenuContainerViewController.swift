@@ -64,6 +64,12 @@ internal class MenuContainerViewController: UIViewController {
         case .began:
             originalContentViewLeadingConstraintConstant = contentViewLeadingConstraint.constant
         case .changed:
+            if velocity.x < 0 {
+                // Prevent right side opening
+                if originalContentViewLeadingConstraintConstant + translation.x < 0 {
+                    break
+                }
+            }
             contentViewLeadingConstraint.constant = originalContentViewLeadingConstraintConstant + translation.x
         case .ended:
             UIView.animate(withDuration: 0.3) {
