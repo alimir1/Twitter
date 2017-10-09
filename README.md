@@ -1,4 +1,4 @@
-# Project 4 - *Twitter*
+*Twitter Clone*
 
 ## Features
 
